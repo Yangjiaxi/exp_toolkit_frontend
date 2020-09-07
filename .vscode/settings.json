@@ -5,6 +5,8 @@
     "[javascriptreact]": {
         "editor.formatOnSave": false
     },
+    "editor.formatOnSave": true,
+    "eslint.autoFixOnSave": true,
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
@@ -12,5 +14,8 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "node_modules": true, // new
-    }
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
 }
