@@ -9,6 +9,8 @@ import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
 
 import ThemeMenu from "../ThemeMenu";
 
+import { PAGE_NAME_DICT_CN } from "../../pages/consts";
+
 import { colorDict } from "../../utils/color";
 
 import useStyles from "./style";
@@ -21,6 +23,8 @@ const Bar = memo(({ themeColor, pageName /* isMobile, toggleSlider */ }) => {
     window.location.reload();
   };
 
+  const pageNameCN = PAGE_NAME_DICT_CN[pageName] || pageName;
+
   return (
     <>
       <Helmet>
@@ -29,7 +33,7 @@ const Bar = memo(({ themeColor, pageName /* isMobile, toggleSlider */ }) => {
           content={colorDict[themeColor][500]}
           data-react-helmet="true"
         />
-        <title>{pageName}</title>
+        <title>{pageNameCN}</title>
       </Helmet>
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
@@ -39,7 +43,7 @@ const Bar = memo(({ themeColor, pageName /* isMobile, toggleSlider */ }) => {
               </IconButton>
             )} */}
           <Typography variant="h6" color="inherit" noWrap>
-            {pageName}
+            {pageNameCN}
           </Typography>
           <div className={classes.rightButtons}>
             <ThemeMenu />

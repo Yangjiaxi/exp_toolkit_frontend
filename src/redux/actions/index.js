@@ -55,3 +55,47 @@ export const detectWidth = (isMobile) => ({
   type: DETECT_WIDTH,
   isMobile,
 });
+
+export const SHOULD_UPDATE_RECENT = "SHOULD_UPDATE_RECENT";
+export const shouldUpdateRecent = () => ({
+  type: SHOULD_UPDATE_RECENT,
+});
+
+export const SHOULD_UPDATE_MY = "SHOULD_UPDATE_MY";
+export const shouldUpdateMy = () => ({
+  type: SHOULD_UPDATE_MY,
+});
+
+export const SHOULD_UPDATE_TRASH = "SHOULD_UPDATE_TRASH";
+export const shouldUpdateTrash = () => ({
+  type: SHOULD_UPDATE_TRASH,
+});
+
+export const GET_RECENT_DOCS_BEGIN = "GET_RECENT_DOCS_BEGIN";
+export const getRecentDocsBegin = () => ({
+  type: GET_RECENT_DOCS_BEGIN,
+});
+
+export const GET_RECENT_DOCS_FINISH = "GET_RECENT_DOCS_FINISH";
+export const getRecentDocsFinish = (recent) => ({
+  type: GET_RECENT_DOCS_FINISH,
+  recent,
+});
+
+export const GET_MY_DOCS_FINISH = "GET_MY_DOCS_FINISH";
+export const getMyDocsFinish = (my) => ({
+  type: GET_MY_DOCS_FINISH,
+  my,
+});
+
+export const GET_TRASH_DOCS_FINISH = "GET_TRASH_DOCS_FINISH";
+export const getTrashDocsFinish = (trash) => ({
+  type: GET_TRASH_DOCS_FINISH,
+  trash,
+});
+
+export const CHECKOUT_CONTENT_START = "CHECKOUT_CONTENT_START";
+export const checkoutContentStart = (id) => ({
+  type: CHECKOUT_CONTENT_START,
+  id,
+});

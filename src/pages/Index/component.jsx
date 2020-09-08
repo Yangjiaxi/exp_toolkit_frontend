@@ -13,22 +13,23 @@ import PageFrame from "../../components/Frame";
 import Notifier from "../../components/Notifier";
 import Snackbar from "../../components/Snackbar";
 
-const Dashboard = lazy(() => import("../Dashboard"));
+const ExpList = lazy(() => import("../ExpList"));
 const About = lazy(() => import("../About"));
+const Project = lazy(() => import("../Project"));
 
 const NoMatch = lazy(() => import("../NoMatch"));
 
 const Index = memo(({ themeMode, themeColor }) => {
   const mainFrame = (Component) => (props) => {
-    // const {
-    //   match: {
-    //     params: { docID },
-    //   },
-    // } = props;
+    const {
+      match: {
+        params: { projectID },
+      },
+    } = props;
     return (
       <PageFrame>
         <Suspense fallback={<Progress />}>
-          <Component />
+          <Component projectID={projectID || undefined} />
         </Suspense>
       </PageFrame>
     );
@@ -63,8 +64,9 @@ const Index = memo(({ themeMode, themeColor }) => {
         <Notifier />
       </Snackbar>
       <Switch>
-        <Route path="/" exact render={mainFrame(Dashboard)} />
+        <Route path="/" exact render={mainFrame(ExpList)} />
         <Route path="/about" exact render={mainFrame(About)} />
+        <Route path="/proj/:projectID" render={mainFrame(Project)} />
         <Route render={mainFrame(NoMatch)} />
       </Switch>
     </MuiThemeProvider>

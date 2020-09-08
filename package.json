@@ -8,6 +8,7 @@
     "@material-ui/styles": "^4.10.0",
     "connected-react-router": "^6.8.0",
     "history": "4.9.0",
+    "moment": "^2.27.0",
     "notistack": "^1.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -15,8 +16,8 @@
     "react-redux": "^7.1.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
-    "redux": "^4.0.4",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "redux": "^4.0.4"
   },
   "scripts": {
     "analyze": "source-map-explorer build/static/js/* --html result.html",
