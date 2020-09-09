@@ -5,9 +5,9 @@ import ChevronLeft from "@material-ui/icons/ChevronLeft";
 import ChevronRight from "@material-ui/icons/ChevronRight";
 import Search from "@material-ui/icons/Search";
 import Clear from "@material-ui/icons/Clear";
+import ArrowDownward from "@material-ui/icons/ArrowDownward";
 
 import MaterialTable from "material-table";
-import D from "./columns";
 
 const tableIcons = {
   FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
@@ -18,19 +18,19 @@ const tableIcons = {
   )),
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
+  SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
 };
 
 const DataTable = memo((props) => {
-  //   const {
-  //     AllData: { columns, data },
-  //   } = props;
+  const { title, columns, data } = props;
+
   return (
     <MaterialTable
-      title="Editable Example"
+      title={title}
       //   columns={columns}
       //   data={data}
-      columns={D.columns}
-      data={D.data}
+      columns={columns}
+      data={data}
       icons={tableIcons}
     />
   );

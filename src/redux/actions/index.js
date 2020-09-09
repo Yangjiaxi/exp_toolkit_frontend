@@ -92,3 +92,20 @@ export const DELELE_PROJECT_FINISH = "DELELE_PROJECT_FINISH";
 export const deleteProjFinish = () => ({
   type: DELELE_PROJECT_FINISH,
 });
+
+export const CREATE_PROJECT_BEGIN = "CREATE_PROJECT_BEGIN";
+export const createProjBegin = () => ({
+  type: CREATE_PROJECT_BEGIN,
+});
+
+export const GET_PROJ_INFO_BEGIN = "GET_PROJ_INFO_BEGIN";
+export const getProjInfoBegin = (id) => ({
+  type: GET_PROJ_INFO_BEGIN,
+  id,
+});
+
+export const GET_PROJ_INFO_FINISH = "GET_PROJ_INFO_FINISH";
+export const getProjInfoFinish = (info) => ({
+  type: GET_PROJ_INFO_FINISH,
+  info,
+});

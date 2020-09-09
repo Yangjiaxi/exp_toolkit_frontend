@@ -1,7 +1,8 @@
 import * as actions from "../actions";
 
 const init = {
-  projs: [],
+  projs: null,
+  info: null,
 };
 
 export const ProjReducer = (state = init, action) => {
@@ -11,6 +12,9 @@ export const ProjReducer = (state = init, action) => {
       return { ...state, projs };
     case actions.DELELE_PROJECT_FINISH: // useless
       return state;
+    case actions.GET_PROJ_INFO_FINISH:
+      const { info } = action;
+      return { ...state, info };
     default:
       return state;
   }

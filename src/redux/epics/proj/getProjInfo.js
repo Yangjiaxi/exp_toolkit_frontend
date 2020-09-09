@@ -10,25 +10,25 @@ import {
 } from "rxjs/operators";
 
 import {
-  GET_PROJECT_BEGIN,
+  GET_PROJ_INFO_BEGIN,
   toggleProgress,
-  getProjFinish,
+  getProjInfoFinish,
 } from "../../actions";
 
 import { API } from "../../const";
 
 import { customError, errHandler } from "..";
 
-export const getProjEpic = (action$) =>
+export const getProjInfoEpic = (action$) =>
   action$.pipe(
-    ofType(GET_PROJECT_BEGIN),
-    mergeMap(() => {
+    ofType(GET_PROJ_INFO_BEGIN),
+    mergeMap(({ id }) => {
       //   const token = checkToken();
-      return ajax.getJSON(`${API}/proj/list`).pipe(
+      return ajax.getJSON(`${API}/proj/info/${id}`).pipe(
         mergeMap((res) => {
           if (res.type === "success") {
             const { data } = res;
-            return of(getProjFinish(data));
+            return of(getProjInfoFinish(data));
           }
           throw customError(res);
         }),

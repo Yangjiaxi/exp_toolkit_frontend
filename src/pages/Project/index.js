@@ -3,17 +3,18 @@ import { bindActionCreators } from "redux";
 
 import Project from "./component";
 
-import { changeBrowserPath } from "../../redux/actions";
+import { changeBrowserPath, getProjInfoBegin } from "../../redux/actions";
 
-const mapStateToProps = () => ({
-  //   isLoading: !id,
-  isLoading: false,
+const mapStateToProps = ({ proj: { info } }) => ({
+  // isLoading: !id,
+  pinfo: info,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       changeBrowserPath,
+      getInfo: getProjInfoBegin,
     },
     dispatch,
   );

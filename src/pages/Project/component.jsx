@@ -1,6 +1,7 @@
 import React, { memo, useEffect } from "react";
+import moment from "moment";
 
-import { Container } from "@material-ui/core";
+import { Container, Typography, Paper, TextField } from "@material-ui/core";
 import Loading from "../../components/CircularProgress";
 import DataTable from "../../components/DataTable";
 
@@ -8,19 +9,112 @@ import { PAGE_NAME_DICT } from "../consts";
 
 import useStyles from "./style";
 
-const Project = memo(({ changeBrowserPath, isLoading }) => {
+const datasPiece = (datas, columns) =>
+  // const {datas, lastUpdate} = data;
+  datas.reduce(
+    (prev, { key, value }) => ({
+      ...prev,
+      [columns[key]]: value,
+    }),
+    {},
+  );
+
+const dataTransform = (info) => {
+  const { schema, data } = info;
+  const mapDict = schema.reduce(
+    (prev, ele, index) => ({
+      ...prev,
+      [ele]: `${index}`,
+    }),
+    {},
+  );
+
+  const columns = schema.map((ele, index) => ({
+    title: ele,
+    field: `${index}`,
+  }));
+
+  columns.push({
+    title: "距今为止",
+    field: `${columns.length}`,
+    type: "time",
+  });
+
+  const dataContent = data.map((ele) => datasPiece(ele.datas, mapDict));
+
+  const dataNeed = data.map((ele, index) => ({
+    ...dataContent[index],
+    [columns.length - 1]: moment(ele.lastUpdate).fromNow(),
+  }));
+
+  console.log(columns);
+  console.log(dataContent);
+  console.log(dataNeed);
+
+  // ADD LastUpdate
+
+  return { columns, dataNeed };
+};
+
+const Project = memo(({ changeBrowserPath, getInfo, pinfo, projectID }) => {
   const classes = useStyles();
   useEffect(() => {
     changeBrowserPath(PAGE_NAME_DICT.PROJECT_PAGE);
   }, [changeBrowserPath]);
 
-  if (isLoading) {
+  useEffect(() => {
+    getInfo(projectID);
+  }, [getInfo]);
+  if (!pinfo) {
     return <Loading />;
   }
+  console.log(pinfo);
+  const { projectName, appendix, createTime } = pinfo;
+  const { columns, dataNeed } = dataTransform(pinfo);
 
   return (
     <Container maxWidth="xl" className={classes.root}>
-      <DataTable />
+      <DataTable title={`${projectName}`} columns={columns} data={dataNeed} />
+      <Paper className={classes.paper} elevation={3}>
+        <TextField
+          id="lastUpdate"
+          label="最后更新"
+          variant="outlined"
+          size="medium"
+          fullWidth
+          defaultValue={`${moment(createTime).format("YYYY-MM-DD HH:mm:ss")}`}
+          InputProps={{
+            readOnly: true,
+            classes: {
+              input: classes.input,
+            },
+          }}
+        />
+        {/* <Typography>
+          {`最后更新: ${moment(createTime).format("YYYY-MM-DD HH:mm:ss")}`}
+        </Typography> */}
+
+        <TextField
+          id="appendix"
+          className={classes.appendix}
+          label="附加信息"
+          size="medium"
+          multiline
+          fullWidth
+          variant="outlined"
+          defaultValue={appendix}
+          InputProps={{
+            readOnly: true,
+            classes: {
+              input: classes.input,
+            },
+          }}
+        />
+        {/* <Typography variant="h5">附加信息</Typography> */}
+        {/* <Paper elevation={1}>
+          <Typography className={classes.appendix}>{appendix}</Typography>
+        </Paper> */}
+      </Paper>
     </Container>
   );
 });

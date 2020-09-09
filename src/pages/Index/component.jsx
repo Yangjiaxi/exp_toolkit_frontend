@@ -13,10 +13,10 @@ import PageFrame from "../../components/Frame";
 import Notifier from "../../components/Notifier";
 import Snackbar from "../../components/Snackbar";
 
-const ExpList = lazy(() => import("../ExpList"));
+const ProjectList = lazy(() => import("../ProjectList"));
 const About = lazy(() => import("../About"));
 const Project = lazy(() => import("../Project"));
-
+const NewProject = lazy(() => import("../NewProject"));
 const NoMatch = lazy(() => import("../NoMatch"));
 
 const Index = memo(({ themeMode, themeColor }) => {
@@ -64,8 +64,9 @@ const Index = memo(({ themeMode, themeColor }) => {
         <Notifier />
       </Snackbar>
       <Switch>
-        <Route path="/" exact render={mainFrame(ExpList)} />
+        <Route path="/" exact render={mainFrame(ProjectList)} />
         <Route path="/about" exact render={mainFrame(About)} />
+        <Route path="/create" exact render={mainFrame(NewProject)} />
         <Route path="/proj/:projectID" render={mainFrame(Project)} />
         <Route render={mainFrame(NoMatch)} />
       </Switch>

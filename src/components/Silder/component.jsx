@@ -17,6 +17,13 @@ import Anchor from "../Anchor";
 import { PAGE_NAME_DICT, PAGE_NAME_DICT_CN } from "../../pages/consts";
 import useStyles from "./style";
 
+const createItem = {
+  type: "link",
+  to: "/create",
+  text: PAGE_NAME_DICT_CN[PAGE_NAME_DICT.NEWPROJECT_PAGE],
+  name: PAGE_NAME_DICT.NEWPROJECT_PAGE,
+};
+
 const itemList = [
   { type: "divider" },
   {
@@ -43,6 +50,10 @@ const Slider = memo(({ open, toggleSlider, pageName, isMobile }) => {
     if (isMobile) toggleSlider();
   };
 
+  const handleCreate = () => {
+    toggleSlider();
+  };
+
   const makeDrawerStyle = () => {
     const boot = { anchor: "left", variant: "permanent" };
     if (isMobile) {
@@ -63,19 +74,23 @@ const Slider = memo(({ open, toggleSlider, pageName, isMobile }) => {
       <List>
         {!isMobile && <div className={classes.toolbar} />}
         <Divider />
-        <ListItem>
-          <Button
-            variant="outlined"
-            color="primary"
-            fullWidth
-            size="large"
-            onClick={() => {}}
-          >
-            <Create />
-            <Typography className={classes.createButton} />
-            Test
-          </Button>
-        </ListItem>
+        <Anchor to={createItem.to}>
+          <ListItem>
+            <Button
+              variant={pageName === createItem.name ? "outlined" : "contained"}
+              // variant="outlined"
+              color="primary"
+              fullWidth
+              size="large"
+              onClick={handleCreate}
+            >
+              <Create />
+              <Typography className={classes.createButton}>
+                {createItem.text}
+              </Typography>
+            </Button>
+          </ListItem>
+        </Anchor>
 
         {itemList.map(({ type, ...rest }, index) => {
           if (type === "divider") return <Divider key={index} />;
