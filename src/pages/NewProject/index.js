@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import Project from "./component";
+import NewProject from "./component";
 
 import { changeBrowserPath } from "../../redux/actions";
 
@@ -18,4 +18,4 @@ const mapDispatchToProps = (dispatch) =>
     dispatch,
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(Project);
+export default connect(mapStateToProps, mapDispatchToProps)(NewProject);

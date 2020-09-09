@@ -3,6 +3,7 @@ export const PAGE_NAME_DICT = {
   ABOUT_PAGE: "ABOUT_PAGE",
   EXPLIST_PAGE: "EXPLIST_PAGE",
   PROJECT_PAGE: "PROJECT_PAGE",
+  NEWPROJECT_PAGE: "NEWPROJECT_PAGE",
 };
 
 export const PAGE_NAME_DICT_CN = {
@@ -10,4 +11,5 @@ export const PAGE_NAME_DICT_CN = {
   ABOUT_PAGE: "关于项目",
   EXPLIST_PAGE: "实验列表",
   PROJECT_PAGE: "项目内容",
+  NEWPROJECT_PAGE: "新建实验",
 };

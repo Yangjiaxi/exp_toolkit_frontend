@@ -3,11 +3,11 @@ import { combineReducers } from "redux";
 import { connectRouter } from "connected-react-router";
 import { componentReducer } from "./component";
 
-import { docsReducer } from "./docs";
+import { ProjReducer } from "./proj";
 
 export const rootReducers = (history) =>
   combineReducers({
     component: componentReducer,
-    docs: docsReducer,
+    proj: ProjReducer,
     router: connectRouter(history),
   });

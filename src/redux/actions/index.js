@@ -71,31 +71,24 @@ export const shouldUpdateTrash = () => ({
   type: SHOULD_UPDATE_TRASH,
 });
 
-export const GET_RECENT_DOCS_BEGIN = "GET_RECENT_DOCS_BEGIN";
-export const getRecentDocsBegin = () => ({
-  type: GET_RECENT_DOCS_BEGIN,
+export const GET_PROJECT_BEGIN = "GET_PROJECT_BEGIN";
+export const getProjBegin = () => ({
+  type: GET_PROJECT_BEGIN,
 });
 
-export const GET_RECENT_DOCS_FINISH = "GET_RECENT_DOCS_FINISH";
-export const getRecentDocsFinish = (recent) => ({
-  type: GET_RECENT_DOCS_FINISH,
-  recent,
+export const GET_PROJECT_FINISH = "GET_PROJECT_FINISH";
+export const getProjFinish = (projs) => ({
+  type: GET_PROJECT_FINISH,
+  projs,
 });
 
-export const GET_MY_DOCS_FINISH = "GET_MY_DOCS_FINISH";
-export const getMyDocsFinish = (my) => ({
-  type: GET_MY_DOCS_FINISH,
-  my,
-});
-
-export const GET_TRASH_DOCS_FINISH = "GET_TRASH_DOCS_FINISH";
-export const getTrashDocsFinish = (trash) => ({
-  type: GET_TRASH_DOCS_FINISH,
-  trash,
-});
-
-export const CHECKOUT_CONTENT_START = "CHECKOUT_CONTENT_START";
-export const checkoutContentStart = (id) => ({
-  type: CHECKOUT_CONTENT_START,
+export const DELELE_PROJECT_BEGIN = "DELETE_PROJECT_BEGIN";
+export const deleteProjBegin = (id) => ({
+  type: DELELE_PROJECT_BEGIN,
   id,
+});
+
+export const DELELE_PROJECT_FINISH = "DELELE_PROJECT_FINISH";
+export const deleteProjFinish = () => ({
+  type: DELELE_PROJECT_FINISH,
 });

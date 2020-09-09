@@ -12,20 +12,26 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 // const TextComp = TextTermMaker("Dialog");
 
 const CustomDialog = memo(
-  ({ open, onCancel, onConfirm, content, title, confirm, cancel }) => (
+  ({
+    open,
+    onCancel,
+    onConfirm,
+    content,
+    title,
+    confirm = "确定",
+    cancel = "取消",
+  }) => (
     <Dialog open={open} onClose={onCancel}>
-      <DialogTitle>{/* <TextComp term={title} /> */}</DialogTitle>
+      <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         <DialogContentText>{content}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={onCancel} color="primary" autoFocus>
-          {/* <TextComp term={cancel} /> */}
-          取消
+          {cancel}
         </Button>
         <Button onClick={onConfirm} color="primary">
-          {/* <TextComp term={confirm} /> */}
-          确定
+          {confirm}
         </Button>
       </DialogActions>
     </Dialog>

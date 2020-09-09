@@ -5,10 +5,13 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { routerMiddleware, ConnectedRouter } from "connected-react-router";
 import { createBrowserHistory } from "history";
 
+import { epicMiddleware, epics } from "./redux/epics";
 import { rootReducers } from "./redux/reducers";
 import Index from "./pages/Index";
 
 export const history = createBrowserHistory();
+
+const middleware = [epicMiddleware];
 
 export const configureStore = () => {
   const store = createStore(
@@ -16,6 +19,7 @@ export const configureStore = () => {
     composeWithDevTools(
       applyMiddleware(
         routerMiddleware(history), // for dispatching history actions
+        ...middleware,
       ),
     ),
   );
@@ -23,6 +27,8 @@ export const configureStore = () => {
 };
 
 export const store = configureStore();
+
+epicMiddleware.run(epics);
 
 const App = memo(() => {
   useEffect(() => {

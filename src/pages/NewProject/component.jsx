@@ -8,10 +8,10 @@ import { PAGE_NAME_DICT } from "../consts";
 
 import useStyles from "./style";
 
-const Project = memo(({ changeBrowserPath, isLoading }) => {
+const NewProject = memo(({ changeBrowserPath, isLoading }) => {
   const classes = useStyles();
   useEffect(() => {
-    changeBrowserPath(PAGE_NAME_DICT.PROJECT_PAGE);
+    changeBrowserPath(PAGE_NAME_DICT.NEWPROJECT_PAGE);
   }, [changeBrowserPath]);
 
   if (isLoading) {
@@ -25,4 +25,4 @@ const Project = memo(({ changeBrowserPath, isLoading }) => {
   );
 });
 
-export default Project;
+export default NewProject;

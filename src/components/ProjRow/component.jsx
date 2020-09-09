@@ -18,41 +18,35 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import Dialog from "../Dialog";
 
-// import { i18nHelper, TextTermMaker } from "../../i18n";
-
-import useStyles from "./style";
-
-// const TextComp = TextTermMaker("DocsTable");
-
 const DocRow = memo((props) => {
   const {
     rowData: {
       title,
-      createTime, // no
+      // createTime, // no
       lastUse, // no
       lastUpdate,
-      deleted, // no
-      id,
+      _id: id,
     },
-    languageName,
-    deleteDoc,
+    deleteProj,
     disableDivider,
     pushUrl,
   } = props;
-  const classes = useStyles();
 
   const [anchorDoc, setAnchorDoc] = useState(null);
   const [dialog, setDialog] = useState(false);
-
-  moment.locale(languageName);
 
   const handleJumpToDoc = () => {
     pushUrl(`/proj/${id}`);
   };
 
+  const handleClickDelete = () => {
+    setAnchorDoc(null);
+    setDialog(true);
+  };
+
   const handleDelete = () => {
     setDialog(false);
-    deleteDoc(id);
+    deleteProj(id);
   };
 
   const handleClickButton = ({ currentTarget }) => {
@@ -82,7 +76,7 @@ const DocRow = memo((props) => {
 
   return (
     <>
-      <ListItem button disabled={deleted} onClick={handleJumpToDoc}>
+      <ListItem button onClick={handleJumpToDoc}>
         <ListItemText primary={titleWords()} secondary={timeWords()} />
         <ListItemSecondaryAction>
           <IconButton onClick={handleClickButton}>
@@ -96,16 +90,14 @@ const DocRow = memo((props) => {
         open={Boolean(anchorDoc)}
         onClose={() => setAnchorDoc(null)}
       >
-        <MenuItem onClick={() => {}}>
-          {/* <TextComp term={i18nHelper.deleteButton} /> */}
-          删除
-        </MenuItem>
+        <MenuItem onClick={handleClickDelete}>删除</MenuItem>
       </Menu>
       <Dialog
+        title="确认"
         open={dialog}
         onConfirm={handleDelete}
         onCancel={() => setDialog(false)}
-        // content={<TextComp term={i18nHelper.deleteHint} />}
+        content="确认要删除嘛？QAQ"
       />
     </>
   );

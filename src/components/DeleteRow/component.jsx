@@ -25,7 +25,7 @@ import useStyles from "./style";
 
 const DeleteRow = memo((props) => {
   const {
-    rowData: { title, owned, id, deleteTime },
+    rowData: { title, id, deleteTime },
     languageName,
     destroyDoc,
     restoreDoc,
