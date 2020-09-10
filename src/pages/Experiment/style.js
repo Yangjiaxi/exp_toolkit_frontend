@@ -5,21 +5,20 @@ const useStyles = makeStyles(({ spacing }) =>
     root: {
       paddingBottom: spacing(30),
     },
-    projectName: {
-      marginBottom: spacing(3),
-    },
-    upload: {
-      fontSize: "1.3em",
-      // width: "5em",
-      // height: "2.5em",
-      float: "right",
-      padding: spacing(1, 7),
+    paper: {
+      marginTop: spacing(2),
+      padding: spacing(3),
+      whiteSpace: "pre-wrap",
     },
     appendix: {
       marginTop: spacing(3),
     },
     input: {
-      fontSize: "1.5em",
+      lineHeight: "1.5em",
+      fontSize: "1.3em",
+    },
+    back: {
+      marginBottom: "1em",
     },
   }),
 );

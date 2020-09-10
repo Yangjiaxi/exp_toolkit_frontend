@@ -93,11 +93,6 @@ export const deleteProjFinish = () => ({
   type: DELELE_PROJECT_FINISH,
 });
 
-export const CREATE_PROJECT_BEGIN = "CREATE_PROJECT_BEGIN";
-export const createProjBegin = () => ({
-  type: CREATE_PROJECT_BEGIN,
-});
-
 export const GET_PROJ_INFO_BEGIN = "GET_PROJ_INFO_BEGIN";
 export const getProjInfoBegin = (id) => ({
   type: GET_PROJ_INFO_BEGIN,
@@ -108,4 +103,27 @@ export const GET_PROJ_INFO_FINISH = "GET_PROJ_INFO_FINISH";
 export const getProjInfoFinish = (info) => ({
   type: GET_PROJ_INFO_FINISH,
   info,
+});
+
+export const GET_EXP_INFO_BEGIN = "GET_EXP_INFO_BEGIN";
+export const getExpInfoBegin = (expID) => ({
+  type: GET_EXP_INFO_BEGIN,
+  expID,
+});
+
+export const GET_EXP_INFO_FINISH = "GET_EXP_INFO_FINISH";
+export const getExpInfoFinish = (expInfo) => ({
+  type: GET_EXP_INFO_FINISH,
+  expInfo,
+});
+
+export const CREATE_PROJECT_BEGIN = "CREATE_PROJECT_BEGIN";
+export const createProjBegin = (uploadData) => ({
+  type: CREATE_PROJECT_BEGIN,
+  uploadData,
+});
+
+export const CREATE_PROJECT_FINISH = "CREATE_PROJECT_FINISH";
+export const createProjFinish = () => ({
+  type: CREATE_PROJECT_FINISH,
 });

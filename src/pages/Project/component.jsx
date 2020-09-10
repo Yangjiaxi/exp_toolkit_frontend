@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from "react";
 import moment from "moment";
 
-import { Container, Typography, Paper, TextField } from "@material-ui/core";
+import { Container, Paper, TextField } from "@material-ui/core";
 import Loading from "../../components/CircularProgress";
 import DataTable from "../../components/DataTable";
 
@@ -10,7 +10,6 @@ import { PAGE_NAME_DICT } from "../consts";
 import useStyles from "./style";
 
 const datasPiece = (datas, columns) =>
-  // const {datas, lastUpdate} = data;
   datas.reduce(
     (prev, { key, value }) => ({
       ...prev,
@@ -35,7 +34,7 @@ const dataTransform = (info) => {
   }));
 
   columns.push({
-    title: "距今为止",
+    title: "最后更新",
     field: `${columns.length}`,
     type: "time",
   });
@@ -47,13 +46,11 @@ const dataTransform = (info) => {
     [columns.length - 1]: moment(ele.lastUpdate).fromNow(),
   }));
 
-  console.log(columns);
-  console.log(dataContent);
-  console.log(dataNeed);
-
-  // ADD LastUpdate
-
-  return { columns, dataNeed };
+  const dataID = data.map((ele) => ({
+    expID: ele._id,
+  }));
+  // console.log(dataID);
+  return { columns, dataNeed, dataID };
 };
 
 const Project = memo(({ changeBrowserPath, getInfo, pinfo, projectID }) => {
@@ -64,17 +61,22 @@ const Project = memo(({ changeBrowserPath, getInfo, pinfo, projectID }) => {
 
   useEffect(() => {
     getInfo(projectID);
-  }, [getInfo]);
+  }, [getInfo, projectID]);
   if (!pinfo) {
     return <Loading />;
   }
-  console.log(pinfo);
+  // console.log(pinfo);
   const { projectName, appendix, createTime } = pinfo;
-  const { columns, dataNeed } = dataTransform(pinfo);
+  const { columns, dataNeed, dataID } = dataTransform(pinfo);
 
   return (
     <Container maxWidth="xl" className={classes.root}>
-      <DataTable title={`${projectName}`} columns={columns} data={dataNeed} />
+      <DataTable
+        title={`${projectName}`}
+        columns={columns}
+        data={dataNeed}
+        dataID={dataID}
+      />
       <Paper className={classes.paper} elevation={3}>
         <TextField
           id="lastUpdate"
@@ -90,9 +92,7 @@ const Project = memo(({ changeBrowserPath, getInfo, pinfo, projectID }) => {
             },
           }}
         />
-        {/* <Typography>
-          {`最后更新: ${moment(createTime).format("YYYY-MM-DD HH:mm:ss")}`}
-        </Typography> */}
+        {}
 
         <TextField
           id="appendix"
@@ -110,10 +110,6 @@ const Project = memo(({ changeBrowserPath, getInfo, pinfo, projectID }) => {
             },
           }}
         />
-        {/* <Typography variant="h5">附加信息</Typography> */}
-        {/* <Paper elevation={1}>
-          <Typography className={classes.appendix}>{appendix}</Typography>
-        </Paper> */}
       </Paper>
     </Container>
   );

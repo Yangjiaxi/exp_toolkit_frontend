@@ -1,7 +1,5 @@
 import React, { memo, forwardRef } from "react";
 
-import { Button } from "@material-ui/core";
-
 import FirstPage from "@material-ui/icons/FirstPage";
 import LastPage from "@material-ui/icons/LastPage";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
@@ -25,8 +23,8 @@ const tableIcons = {
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
 };
 
-const DataTable = memo((props) => {
-  const { title, columns, data, dataID, pushUrl } = props;
+const DetailTable = memo((props) => {
+  const { title, columns, data } = props;
 
   return (
     <MaterialTable
@@ -37,25 +35,11 @@ const DataTable = memo((props) => {
       style={{
         padding: "1em",
       }}
-      actions={[
-        {
-          icon: tableIcons.NextPage,
-          tooltip: "More info",
-          onClick: (event, rowData) => {
-            const i = data.indexOf(rowData);
-            pushUrl(`/exp/${dataID[i].expID}`);
-          },
-        },
-      ]}
       options={{
-        actionsColumnIndex: -1,
         paging: false,
-      }}
-      localization={{
-        header: { actions: "详细信息" },
       }}
     />
   );
 });
 
-export default DataTable;
+export default DetailTable;

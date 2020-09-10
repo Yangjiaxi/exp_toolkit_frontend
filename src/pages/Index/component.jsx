@@ -16,20 +16,26 @@ import Snackbar from "../../components/Snackbar";
 const ProjectList = lazy(() => import("../ProjectList"));
 const About = lazy(() => import("../About"));
 const Project = lazy(() => import("../Project"));
+const Experiment = lazy(() => import("../Experiment"));
+
 const NewProject = lazy(() => import("../NewProject"));
+
 const NoMatch = lazy(() => import("../NoMatch"));
 
 const Index = memo(({ themeMode, themeColor }) => {
   const mainFrame = (Component) => (props) => {
     const {
       match: {
-        params: { projectID },
+        params: { projectID, expID },
       },
     } = props;
     return (
       <PageFrame>
         <Suspense fallback={<Progress />}>
-          <Component projectID={projectID || undefined} />
+          <Component
+            projectID={projectID || undefined}
+            expID={expID || undefined}
+          />
         </Suspense>
       </PageFrame>
     );
@@ -68,6 +74,7 @@ const Index = memo(({ themeMode, themeColor }) => {
         <Route path="/about" exact render={mainFrame(About)} />
         <Route path="/create" exact render={mainFrame(NewProject)} />
         <Route path="/proj/:projectID" render={mainFrame(Project)} />
+        <Route path="/exp/:expID" render={mainFrame(Experiment)} />
         <Route render={mainFrame(NoMatch)} />
       </Switch>
     </MuiThemeProvider>

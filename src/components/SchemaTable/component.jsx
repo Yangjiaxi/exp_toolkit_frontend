@@ -10,11 +10,10 @@ import Edit from "@material-ui/icons/Edit";
 import Check from "@material-ui/icons/Check";
 import MaterialTable from "material-table";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
-import Remove from "@material-ui/icons/Remove";
 
 import AddBox from "@material-ui/icons/AddBox";
 
-import D from "./columns";
+// import columns from "./columns";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -34,16 +33,24 @@ const tableIcons = {
   ThirdStateCheck: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
 };
 
-const SchemaTable = memo(() => {
-  const [state, setState] = React.useState(D);
+const SchemaTable = memo((props) => {
+  const [state, setState] = React.useState(props);
   return (
     <MaterialTable
-      title="Editable Example"
-      //   columns={columns}
-      //   data={data}
+      title={state.title}
       columns={state.columns}
       data={state.data}
       icons={tableIcons}
+      options={{
+        paging: false,
+      }}
+      localization={{
+        body: {
+          editRow: {
+            deleteText: "确认删除¿",
+          },
+        },
+      }}
       editable={{
         onRowAdd: (newData) =>
           new Promise((resolve) => {
@@ -52,9 +59,10 @@ const SchemaTable = memo(() => {
               setState((prevState) => {
                 const data = [...prevState.data];
                 data.push(newData);
+                state.onChange({ data });
                 return { ...prevState, data };
               });
-            }, 600);
+            }, 200);
           }),
         onRowUpdate: (newData, oldData) =>
           new Promise((resolve) => {
@@ -64,10 +72,11 @@ const SchemaTable = memo(() => {
                 setState((prevState) => {
                   const data = [...prevState.data];
                   data[data.indexOf(oldData)] = newData;
+                  state.onChange({ data });
                   return { ...prevState, data };
                 });
               }
-            }, 600);
+            }, 200);
           }),
         onRowDelete: (oldData) =>
           new Promise((resolve) => {
@@ -76,9 +85,10 @@ const SchemaTable = memo(() => {
               setState((prevState) => {
                 const data = [...prevState.data];
                 data.splice(data.indexOf(oldData), 1);
+                state.onChange({ data });
                 return { ...prevState, data };
               });
-            }, 600);
+            }, 200);
           }),
       }}
     />

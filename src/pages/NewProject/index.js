@@ -3,7 +3,11 @@ import { bindActionCreators } from "redux";
 
 import NewProject from "./component";
 
-import { changeBrowserPath } from "../../redux/actions";
+import {
+  changeBrowserPath,
+  createProjBegin,
+  enqueueSnackbar,
+} from "../../redux/actions";
 
 const mapStateToProps = () => ({
   //   isLoading: !id,
@@ -14,6 +18,8 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       changeBrowserPath,
+      createProj: createProjBegin,
+      enqueueSnackbar,
     },
     dispatch,
   );
