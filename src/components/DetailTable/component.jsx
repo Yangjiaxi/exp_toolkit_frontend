@@ -23,9 +23,7 @@ const tableIcons = {
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
 };
 
-const DetailTable = memo((props) => {
-  const { title, columns, data } = props;
-
+const DetailTable = memo(({ title, columns, data }) => {
   return (
     <MaterialTable
       title={title}

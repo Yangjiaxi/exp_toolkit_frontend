@@ -6,7 +6,6 @@ import Project from "./component";
 import { changeBrowserPath, getProjInfoBegin } from "../../redux/actions";
 
 const mapStateToProps = ({ proj: { info } }) => ({
-  // isLoading: !id,
   pinfo: info,
 });
 

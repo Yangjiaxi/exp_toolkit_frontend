@@ -49,7 +49,6 @@ const dataTransform = (info) => {
   const dataID = data.map((ele) => ({
     expID: ele._id,
   }));
-  // console.log(dataID);
   return { columns, dataNeed, dataID };
 };
 
@@ -62,6 +61,7 @@ const Project = memo(({ changeBrowserPath, getInfo, pinfo, projectID }) => {
   useEffect(() => {
     getInfo(projectID);
   }, [getInfo, projectID]);
+
   if (!pinfo) {
     return <Loading />;
   }

@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-// import { push } from "connected-react-router";
 import DetailTable from "./component";
 
 const mapStateToProps = () => ({});
