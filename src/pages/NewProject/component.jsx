@@ -7,15 +7,13 @@ import SchemaTable from "../../components/SchemaTable";
 import { PAGE_NAME_DICT } from "../consts";
 
 import useStyles from "./style";
-import projCreate from "./projCreate";
 
 const NewProject = memo(
   ({ changeBrowserPath, isLoading, createProj, enqueueSnackbar }) => {
     const [projName, setProjName] = useState("");
     const [appendix, setAppendix] = useState("");
     // eslint-disable-next-line
-    const [projColumns, setColumns] = useState(projCreate.columns);
-    const [projData, setData] = useState(projCreate.data);
+    const [schemaData, setSchemaData] = useState([{ name: "状态", jsonKey: "Status", showInProj: true }]);
 
     const classes = useStyles();
 
@@ -27,29 +25,27 @@ const NewProject = memo(
     const handleAppendix = ({ target: { value } }) => {
       setAppendix(value);
       // console.log(projColumns);
-      console.log(projData);
     };
 
     const aggregateData = () => {
-      const uploadData = {
-        title: projName,
-        appendix,
-        fields: projData.map(({ tableData, ...rest }) => ({ ...rest })),
-      };
-      console.log(uploadData);
       if (projName.trim() === "") {
         enqueueSnackbar("项目名称不能为空", { variant: "error" });
         return;
       }
+      const uploadData = {
+        title: projName.trim(),
+        appendix: appendix.trim(),
+        fields: schemaData.map(({ tableData, ...rest }) => ({
+          ...rest,
+        })),
+      };
+      console.log(uploadData);
       createProj(uploadData);
     };
 
-    const onChange = (data) => {
-      setData(data);
+    const tableChangeHandler = (newAllData) => {
+      setSchemaData(newAllData);
     };
-    // useEffect(() => {
-    //   createProj(uploadData);
-    // }, [createProj, projectID]);
 
     useEffect(() => {
       changeBrowserPath(PAGE_NAME_DICT.NEWPROJECT_PAGE);
@@ -80,9 +76,8 @@ const NewProject = memo(
         />
         <SchemaTable
           title="项目数据列"
-          data={projData}
-          columns={projColumns}
-          onChange={onChange}
+          data={schemaData}
+          onChange={tableChangeHandler}
         />
         <TextField
           id="appendix"
@@ -91,7 +86,6 @@ const NewProject = memo(
           className={classes.appendix}
           multiline
           rows={3}
-          defaultValue=""
           value={appendix}
           fullWidth
           onChange={handleAppendix}

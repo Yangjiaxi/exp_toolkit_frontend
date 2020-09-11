@@ -1,4 +1,4 @@
-import React, { memo, forwardRef } from "react";
+import React, { memo, forwardRef, useState, useEffect } from "react";
 import FirstPage from "@material-ui/icons/FirstPage";
 import LastPage from "@material-ui/icons/LastPage";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";
@@ -13,7 +13,7 @@ import ArrowDownward from "@material-ui/icons/ArrowDownward";
 
 import AddBox from "@material-ui/icons/AddBox";
 
-// import columns from "./columns";
+import { columns } from "./projCreate";
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -33,13 +33,42 @@ const tableIcons = {
   ThirdStateCheck: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
 };
 
-const SchemaTable = memo((props) => {
-  const [state, setState] = React.useState(props);
+const SchemaTable = memo(({ title, onChange, data }) => {
+  const rowAddHandler = (newData) =>
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+        onChange([...data, newData]);
+      }, 100);
+    });
+
+  const rowUpdateHandler = (newData, oldData) =>
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+        const cpyData = [...data];
+
+        cpyData[cpyData.indexOf(oldData)] = newData;
+        onChange(cpyData);
+      }, 100);
+    });
+
+  const rowDeleteHandler = (oldData) =>
+    new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+        const cpyData = [...data];
+
+        cpyData.splice(cpyData.indexOf(oldData), 1);
+        onChange(cpyData);
+      }, 100);
+    });
+
   return (
     <MaterialTable
-      title={state.title}
-      columns={state.columns}
-      data={state.data}
+      title={title}
+      columns={columns}
+      data={data}
       icons={tableIcons}
       options={{
         paging: false,
@@ -52,44 +81,9 @@ const SchemaTable = memo((props) => {
         },
       }}
       editable={{
-        onRowAdd: (newData) =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              setState((prevState) => {
-                const data = [...prevState.data];
-                data.push(newData);
-                state.onChange({ data });
-                return { ...prevState, data };
-              });
-            }, 200);
-          }),
-        onRowUpdate: (newData, oldData) =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              if (oldData) {
-                setState((prevState) => {
-                  const data = [...prevState.data];
-                  data[data.indexOf(oldData)] = newData;
-                  state.onChange({ data });
-                  return { ...prevState, data };
-                });
-              }
-            }, 200);
-          }),
-        onRowDelete: (oldData) =>
-          new Promise((resolve) => {
-            setTimeout(() => {
-              resolve();
-              setState((prevState) => {
-                const data = [...prevState.data];
-                data.splice(data.indexOf(oldData), 1);
-                state.onChange({ data });
-                return { ...prevState, data };
-              });
-            }, 200);
-          }),
+        onRowAdd: rowAddHandler,
+        onRowUpdate: rowUpdateHandler,
+        onRowDelete: rowDeleteHandler,
       }}
     />
   );
