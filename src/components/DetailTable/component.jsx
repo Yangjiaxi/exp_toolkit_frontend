@@ -1,15 +1,16 @@
 import React, { memo, forwardRef } from "react";
 
-import FirstPage from "@material-ui/icons/FirstPage";
-import LastPage from "@material-ui/icons/LastPage";
-import ChevronLeft from "@material-ui/icons/ChevronLeft";
-import ChevronRight from "@material-ui/icons/ChevronRight";
-import Search from "@material-ui/icons/Search";
-import Clear from "@material-ui/icons/Clear";
-import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import {
+  FirstPage,
+  LastPage,
+  ChevronLeft,
+  ChevronRight,
+  Search,
+  Clear,
+  ArrowDownward,
+} from "@material-ui/icons";
 
 import MaterialTable from "material-table";
-// import useStyles from "./style";
 
 const tableIcons = {
   FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),

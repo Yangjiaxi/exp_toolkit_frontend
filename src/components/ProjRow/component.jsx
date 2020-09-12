@@ -5,16 +5,18 @@ import moment from "moment";
 
 // import copy from "copy-to-clipboard";
 
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import Typography from "@material-ui/core/Typography";
+import {
+  Divider,
+  IconButton,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Typography,
+} from "@material-ui/core";
 
-import MenuIcon from "@material-ui/icons/Menu";
+import { Menu as MenuIcon } from "@material-ui/icons";
 
 import Dialog from "../Dialog";
 

@@ -2,15 +2,12 @@ import React, { memo } from "react";
 
 import Helmet from "react-helmet";
 
-// import MenuIcon from "@material-ui/icons/Menu";
-import RefreshIcon from "@material-ui/icons/Refresh";
-
+import { Refresh as RefreshIcon } from "@material-ui/icons";
 import { AppBar, IconButton, Toolbar, Typography } from "@material-ui/core";
 
 import ThemeMenu from "../ThemeMenu";
 
 import { PAGE_NAME_DICT_CN } from "../../pages/consts";
-
 import { colorDict } from "../../utils/color";
 
 import useStyles from "./style";

@@ -4,8 +4,6 @@ import { CircularProgress, Typography, Paper } from "@material-ui/core";
 
 import useStyles from "./style";
 
-// const TextComp = TextTermMaker("CircularProgress");
-
 const Progress = ({ text = "" }) => {
   const classes = useStyles();
   return (

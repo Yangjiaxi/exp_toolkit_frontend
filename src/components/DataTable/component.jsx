@@ -1,13 +1,9 @@
 import React, { memo, forwardRef } from "react";
 
-import ChevronRight from "@material-ui/icons/ChevronRight";
-import Search from "@material-ui/icons/Search";
-import Clear from "@material-ui/icons/Clear";
-import ArrowDownward from "@material-ui/icons/ArrowDownward";
+import { ChevronRight, Search, Clear, ArrowDownward } from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
 
 import MaterialTable from "material-table";
-// import useStyles from "./style";
 
 const tableIcons = {
   NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),

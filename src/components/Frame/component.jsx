@@ -1,9 +1,8 @@
 import React, { memo, useEffect } from "react";
-// import { Redirect } from "react-router";
 
 import { Container, useMediaQuery, useTheme, Fab } from "@material-ui/core";
 
-import MenuIcon from "@material-ui/icons/Menu";
+import { Menu as MenuIcon } from "@material-ui/icons";
 
 import Progress from "../Progress";
 import Slider from "../Silder";

@@ -1,15 +1,20 @@
 import React, { memo, useState, useMemo } from "react";
 
-import Checked from "@material-ui/icons/Check";
-import Palette from "@material-ui/icons/Palette";
+import {
+  Check as Checked,
+  Palette,
+  ArrowRightAlt,
+  Brightness5 as SunIcon,
+  Brightness3 as MoonIcon,
+  Palette as CircleIcon,
+} from "@material-ui/icons";
 
 import {
   IconButton,
   Menu,
   MenuItem,
-  ListItemAvatar,
+  ListItemIcon,
   Typography,
-  Avatar,
   ListItemText,
   ListItemSecondaryAction,
   Divider,
@@ -45,6 +50,19 @@ const ThemeMenu = memo(
       </IconButton>
     );
 
+    const changeModeWord = () => {
+      let fromIcon = <SunIcon />;
+      let toIcon = <MoonIcon />;
+      if (themeMode === "dark") [fromIcon, toIcon] = [toIcon, fromIcon];
+      return (
+        <>
+          {fromIcon}
+          <ArrowRightAlt style={{ margin: "0 1em" }} />
+          {toIcon}
+        </>
+      );
+    };
+
     const themeMenu = (
       <Menu
         anchorEl={anchorTheme}
@@ -52,8 +70,23 @@ const ThemeMenu = memo(
         onClose={handleClose(setAnchorTheme)}
         PaperProps={{ style: { maxHeight: 330 } }}
       >
-        <MenuItem onClick={() => handleChangeThemeMode()}>
-          <Typography>切换主题颜色</Typography>
+        <MenuItem>
+          <ListItemText>
+            <Typography
+              align="center"
+              color="textPrimary"
+              style={{ fontWeight: "bold" }}
+            >
+              主题与颜色
+            </Typography>
+          </ListItemText>
+        </MenuItem>
+        <Divider />
+        <MenuItem
+          onClick={() => handleChangeThemeMode()}
+          style={{ justifyContent: "center" }}
+        >
+          {changeModeWord()}
         </MenuItem>
         <Divider />
         {useMemo(
@@ -64,9 +97,9 @@ const ThemeMenu = memo(
                 key={index}
                 onClick={() => handleChangeColor(name)}
               >
-                <ListItemAvatar>
-                  <Avatar style={{ backgroundColor: colorObj[500] }} />
-                </ListItemAvatar>
+                <ListItemIcon>
+                  <CircleIcon style={{ color: colorObj[500] }} />
+                </ListItemIcon>
                 <ListItemText>
                   <Typography style={{ color: colorObj[500] }}>
                     {name.toUpperCase()}

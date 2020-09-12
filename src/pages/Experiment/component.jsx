@@ -1,8 +1,9 @@
 import React, { memo, useEffect } from "react";
 import moment from "moment";
 
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import { Container, Button } from "@material-ui/core";
+import { ChevronLeft as ChevronLeftIcon } from "@material-ui/icons";
+
 import Loading from "../../components/CircularProgress";
 import DetailTable from "../../components/DetailTable";
 
