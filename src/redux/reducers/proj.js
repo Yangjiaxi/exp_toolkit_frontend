@@ -21,6 +21,8 @@ export const ProjReducer = (state = init, action) => {
     case actions.GET_EXP_INFO_FINISH:
       const { expInfo } = action;
       return { ...state, expInfo };
+    case actions.CLEAN_UP_PROJECT:
+      return { ...state, info: null };
     default:
       return state;
   }

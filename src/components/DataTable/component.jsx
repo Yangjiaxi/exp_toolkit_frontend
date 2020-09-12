@@ -48,7 +48,7 @@ const DataTable = memo((props) => {
         },
       }}
       localization={{
-        header: { actions: "详细信息" },
+        header: { actions: "详细" },
       }}
       components={{
         Action: (_props) => {

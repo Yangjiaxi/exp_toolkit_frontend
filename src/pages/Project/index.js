@@ -3,7 +3,11 @@ import { bindActionCreators } from "redux";
 
 import Project from "./component";
 
-import { changeBrowserPath, getProjInfoBegin } from "../../redux/actions";
+import {
+  changeBrowserPath,
+  getProjInfoBegin,
+  cleanUpProject,
+} from "../../redux/actions";
 
 const mapStateToProps = ({ proj: { info } }) => ({
   pinfo: info,
@@ -13,6 +17,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       changeBrowserPath,
+      cleanUpProject,
       getInfo: getProjInfoBegin,
     },
     dispatch,

@@ -127,3 +127,8 @@ export const CREATE_PROJECT_FINISH = "CREATE_PROJECT_FINISH";
 export const createProjFinish = () => ({
   type: CREATE_PROJECT_FINISH,
 });
+
+export const CLEAN_UP_PROJECT = "CLEAN_UP_PROJECT";
+export const cleanUpProject = () => ({
+  type: CLEAN_UP_PROJECT,
+});

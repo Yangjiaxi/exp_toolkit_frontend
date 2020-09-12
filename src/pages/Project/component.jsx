@@ -53,67 +53,70 @@ const dataTransform = (info) => {
   return { columns, dataNeed, dataID };
 };
 
-const Project = memo(({ changeBrowserPath, getInfo, pinfo, projectID }) => {
-  const classes = useStyles();
-  useEffect(() => {
-    changeBrowserPath(PAGE_NAME_DICT.PROJECT_PAGE);
-  }, [changeBrowserPath]);
+const Project = memo(
+  ({ changeBrowserPath, getInfo, pinfo, projectID, cleanUpProject }) => {
+    const classes = useStyles();
+    useEffect(() => {
+      changeBrowserPath(PAGE_NAME_DICT.PROJECT_PAGE);
+    }, [changeBrowserPath]);
 
-  useEffect(() => {
-    getInfo(projectID);
-  }, [getInfo, projectID]);
+    useEffect(() => {
+      getInfo(projectID);
+      return () => cleanUpProject();
+    }, [getInfo, projectID]);
 
-  if (!pinfo) {
-    return <Loading />;
-  }
-  // console.log(pinfo);
-  const { projectName, appendix, createTime } = pinfo;
-  const { columns, dataNeed, dataID } = dataTransform(pinfo);
+    if (!pinfo) {
+      return <Loading />;
+    }
+    // console.log(pinfo);
+    const { projectName, appendix, createTime } = pinfo;
+    const { columns, dataNeed, dataID } = dataTransform(pinfo);
 
-  return (
-    <Container maxWidth="xl" className={classes.root}>
-      <DataTable
-        title={`${projectName}`}
-        columns={columns}
-        data={dataNeed}
-        dataID={dataID}
-      />
-      <Paper className={classes.paper} elevation={3}>
-        <TextField
-          id="lastUpdate"
-          label="最后更新"
-          variant="outlined"
-          size="medium"
-          fullWidth
-          defaultValue={`${moment(createTime).format("YYYY-MM-DD HH:mm:ss")}`}
-          InputProps={{
-            readOnly: true,
-            classes: {
-              input: classes.input,
-            },
-          }}
+    return (
+      <Container maxWidth="xl" className={classes.root}>
+        <DataTable
+          title={`${projectName}`}
+          columns={columns}
+          data={dataNeed}
+          dataID={dataID}
         />
-        {}
+        <Paper className={classes.paper} elevation={3}>
+          <TextField
+            id="lastUpdate"
+            label="最后更新"
+            variant="outlined"
+            size="medium"
+            fullWidth
+            defaultValue={`${moment(createTime).format("YYYY-MM-DD HH:mm:ss")}`}
+            InputProps={{
+              readOnly: true,
+              classes: {
+                input: classes.input,
+              },
+            }}
+          />
+          {}
 
-        <TextField
-          id="appendix"
-          className={classes.appendix}
-          label="附加信息"
-          size="medium"
-          multiline
-          fullWidth
-          variant="outlined"
-          defaultValue={appendix}
-          InputProps={{
-            readOnly: true,
-            classes: {
-              input: classes.input,
-            },
-          }}
-        />
-      </Paper>
-    </Container>
-  );
-});
+          <TextField
+            id="appendix"
+            className={classes.appendix}
+            label="附加信息"
+            size="medium"
+            multiline
+            fullWidth
+            variant="outlined"
+            defaultValue={appendix}
+            InputProps={{
+              readOnly: true,
+              classes: {
+                input: classes.input,
+              },
+            }}
+          />
+        </Paper>
+      </Container>
+    );
+  },
+);
 
 export default Project;
