@@ -23,7 +23,6 @@ export const getExpEpic = (action$) =>
   action$.pipe(
     ofType(GET_EXP_INFO_BEGIN),
     mergeMap(({ expID }) => {
-      console.log(expID);
       return ajax.getJSON(`${API}/exp/info/${expID}`).pipe(
         mergeMap((res) => {
           if (res.type === "success") {

@@ -1,4 +1,4 @@
-import React, { memo, forwardRef, useState, useEffect } from "react";
+import React, { memo, forwardRef } from "react";
 import FirstPage from "@material-ui/icons/FirstPage";
 import LastPage from "@material-ui/icons/LastPage";
 import ChevronLeft from "@material-ui/icons/ChevronLeft";

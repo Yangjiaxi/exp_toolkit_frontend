@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from "react";
 
-import DocsTable from "../../components/ProjTable";
+import ProjectsTable from "../../components/ProjTable";
 import Loading from "../../components/CircularProgress";
 
 import { PAGE_NAME_DICT } from "../consts";
@@ -19,13 +19,14 @@ const ProjectList = memo(({ changeBrowserPath, projs, getProj }) => {
     return <Loading />;
   }
 
-  // const docs = recentDocs || [];
-  const docs = projs || [];
-  const sortedDocs = docs.sort(({ lastUse: a }, { lastUse: b }) => b - a);
+  const projects = projs || [];
+  const sortedProjects = projects.sort(
+    ({ lastUse: a }, { lastUse: b }) => b - a,
+  );
 
   return (
     <>
-      <DocsTable data={sortedDocs} />
+      <ProjectsTable data={sortedProjects} />
     </>
   );
 });

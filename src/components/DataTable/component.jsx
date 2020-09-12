@@ -19,8 +19,7 @@ const tableIcons = {
 const DataTable = memo((props) => {
   const { title, columns, data, dataID, pushUrl } = props;
 
-  const createClickHandler = (_props) => (event) => {
-    // console.log(_props);
+  const createClickHandler = (_props) => () => {
     const {
       data: {
         tableData: { id },

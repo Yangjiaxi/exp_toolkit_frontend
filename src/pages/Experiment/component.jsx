@@ -72,7 +72,6 @@ const dataTransform = (info) => {
   const dataID = data.map((ele) => ({
     expID: ele._id,
   }));
-  // console.log(dataID);
   return { columns, dataNeed, dataID };
 };
 
@@ -82,7 +81,6 @@ const Experiment = memo(({ changeBrowserPath, expInfo, expID, getInfo }) => {
     changeBrowserPath(PAGE_NAME_DICT.EXP_PAGE);
   }, [changeBrowserPath]);
 
-  console.log(expID);
   useEffect(() => {
     getInfo(expID);
   }, [getInfo, expID]);
@@ -90,7 +88,6 @@ const Experiment = memo(({ changeBrowserPath, expInfo, expID, getInfo }) => {
   if (!expInfo) {
     return <Loading />;
   }
-  //   console.log(expInfo);
   const { columns, data } = D;
 
   return (

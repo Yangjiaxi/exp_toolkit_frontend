@@ -18,15 +18,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 
 import Dialog from "../Dialog";
 
-const DocRow = memo((props) => {
+const ProjectRow = memo((props) => {
   const {
-    rowData: {
-      title,
-      // createTime, // no
-      lastUse, // no
-      lastUpdate,
-      _id: id,
-    },
+    rowData: { title, lastUse, lastUpdate, _id: id },
     deleteProj,
     disableDivider,
     pushUrl,
@@ -54,13 +48,16 @@ const DocRow = memo((props) => {
   };
 
   const timeWords = () => {
+    const lastUpdateWord = lastUpdate
+      ? moment(lastUpdate).format("YYYY-MM-DD HH:mm:ss")
+      : "暂无";
     return (
       <>
         <Typography component="span" display="block">
           {`最后查看: ${moment(lastUse).format("YYYY-MM-DD HH:mm:ss")}`}
         </Typography>
         <Typography component="span" display="block">
-          {`最新更新: ${moment(lastUpdate).format("YYYY-MM-DD HH:mm:ss")}`}
+          {`最新更新: ${lastUpdateWord}`}
         </Typography>
       </>
     );
@@ -84,6 +81,7 @@ const DocRow = memo((props) => {
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>
+
       {!disableDivider && <Divider variant="middle" />}
       <Menu
         anchorEl={anchorDoc}
@@ -103,4 +101,4 @@ const DocRow = memo((props) => {
   );
 });
 
-export default DocRow;
+export default ProjectRow;

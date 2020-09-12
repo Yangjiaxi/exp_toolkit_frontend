@@ -3,7 +3,7 @@ import { bindActionCreators } from "redux";
 
 import {} from "../../redux/actions";
 
-import DocsTable from "./component";
+import ProjectsTable from "./component";
 
 const mapStateToProps = ({ component: { languageName, isMobile } }) => ({
   languageName,
@@ -12,4 +12,4 @@ const mapStateToProps = ({ component: { languageName, isMobile } }) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({}, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(DocsTable);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectsTable);
