@@ -63,7 +63,8 @@ const Project = memo(
     useEffect(() => {
       getInfo(projectID);
       return () => cleanUpProject();
-    }, [getInfo, projectID]);
+      // eslint-disable-next-line
+    }, [projectID]);
 
     if (!pinfo) {
       return <Loading />;
