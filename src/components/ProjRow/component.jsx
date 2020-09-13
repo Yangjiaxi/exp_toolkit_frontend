@@ -7,6 +7,7 @@ import moment from "moment";
 
 import {
   Divider,
+  Grow,
   IconButton,
   ListItem,
   ListItemSecondaryAction,
@@ -76,7 +77,9 @@ const ProjectRow = memo((props) => {
   return (
     <>
       <ListItem button onClick={handleJumpToDoc}>
-        <ListItemText primary={titleWords()} secondary={timeWords()} />
+        <Grow in>
+          <ListItemText primary={titleWords()} secondary={timeWords()} />
+        </Grow>
         <ListItemSecondaryAction>
           <IconButton onClick={handleClickButton}>
             <MenuIcon />

@@ -11,15 +11,34 @@ import {
   Edit,
   Check,
   ArrowDownward,
-  AddBox,
+  AddCircle,
 } from "@material-ui/icons";
 
 import MaterialTable from "material-table";
 
-import { columns } from "./projCreate";
+const columns = [
+  {
+    title: "表头名称",
+    field: "name",
+    validate: (rowData) => rowData.name !== "",
+    initialEditValue: "",
+  },
+  {
+    title: "JSON Key",
+    field: "jsonKey",
+    validate: (rowData) => rowData.jsonKey !== "",
+    initialEditValue: "",
+  },
+  {
+    title: "是否在总表",
+    field: "showInProj",
+    type: "boolean",
+    initialEditValue: true,
+  },
+];
 
 const tableIcons = {
-  Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
+  Add: forwardRef((props, ref) => <AddCircle {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
   Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
   Delete: forwardRef((props, ref) => <DeleteOutline {...props} ref={ref} />),
@@ -75,13 +94,15 @@ const SchemaTable = memo(({ title, onChange, data }) => {
       icons={tableIcons}
       options={{
         paging: false,
+        actionsColumnIndex: -1,
       }}
       localization={{
         body: {
           editRow: {
-            deleteText: "确认删除¿",
+            deleteText: "确认删除？",
           },
         },
+        header: { actions: "操作" },
       }}
       editable={{
         onRowAdd: rowAddHandler,

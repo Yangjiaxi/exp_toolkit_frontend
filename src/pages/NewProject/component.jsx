@@ -13,8 +13,9 @@ const NewProject = memo(
   ({ changeBrowserPath, isLoading, createProj, enqueueSnackbar }) => {
     const [projName, setProjName] = useState("");
     const [appendix, setAppendix] = useState("");
-    // eslint-disable-next-line
-    const [schemaData, setSchemaData] = useState([{ name: "状态", jsonKey: "Status", showInProj: true }]);
+    const [schemaData, setSchemaData] = useState([
+      { name: "状态", jsonKey: "status", showInProj: true },
+    ]);
 
     const classes = useStyles();
 

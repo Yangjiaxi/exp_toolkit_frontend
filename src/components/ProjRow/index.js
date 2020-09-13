@@ -4,11 +4,11 @@ import { push } from "connected-react-router";
 
 import { deleteProjBegin } from "../../redux/actions";
 
-import DocsRow from "./component";
+import ProjectRow from "./component";
 
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ deleteProj: deleteProjBegin, pushUrl: push }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(DocsRow);
+export default connect(mapStateToProps, mapDispatchToProps)(ProjectRow);

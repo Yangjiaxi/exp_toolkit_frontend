@@ -24,7 +24,7 @@ export const getProjEpic = (action$) =>
     ofType(GET_PROJECT_BEGIN),
     mergeMap(() => {
       //   const token = checkToken();
-      return ajax.getJSON(`${API}/proj/list`).pipe(
+      return ajax.getJSON(`${API}/proj/list/my`).pipe(
         mergeMap((res) => {
           if (res.type === "success") {
             const { data } = res;

@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from "react";
 import moment from "moment";
 
-import { Container, Paper, TextField } from "@material-ui/core";
+import { Container, Paper, TextField, Grow } from "@material-ui/core";
 
 import Loading from "../../components/CircularProgress";
 import DataTable from "../../components/DataTable";
@@ -81,40 +81,44 @@ const Project = memo(
           data={dataNeed}
           dataID={dataID}
         />
-        <Paper className={classes.paper} elevation={3}>
-          <TextField
-            id="lastUpdate"
-            label="项目创建时间"
-            variant="outlined"
-            size="medium"
-            fullWidth
-            defaultValue={`${moment(createTime).format("YYYY-MM-DD HH:mm:ss")}`}
-            InputProps={{
-              readOnly: true,
-              classes: {
-                input: classes.input,
-              },
-            }}
-          />
-          {}
+        <Grow in>
+          <Paper className={classes.paper} elevation={3}>
+            <TextField
+              id="lastUpdate"
+              label="项目创建时间"
+              variant="outlined"
+              size="medium"
+              fullWidth
+              defaultValue={`${moment(createTime).format(
+                "YYYY-MM-DD HH:mm:ss",
+              )}`}
+              InputProps={{
+                readOnly: true,
+                classes: {
+                  input: classes.input,
+                },
+              }}
+            />
+            {}
 
-          <TextField
-            id="appendix"
-            className={classes.appendix}
-            label="附加信息"
-            size="medium"
-            multiline
-            fullWidth
-            variant="outlined"
-            defaultValue={appendix}
-            InputProps={{
-              readOnly: true,
-              classes: {
-                input: classes.input,
-              },
-            }}
-          />
-        </Paper>
+            <TextField
+              id="appendix"
+              className={classes.appendix}
+              label="附加信息"
+              size="medium"
+              multiline
+              fullWidth
+              variant="outlined"
+              defaultValue={appendix}
+              InputProps={{
+                readOnly: true,
+                classes: {
+                  input: classes.input,
+                },
+              }}
+            />
+          </Paper>
+        </Grow>
       </Container>
     );
   },
