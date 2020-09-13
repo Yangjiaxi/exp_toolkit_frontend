@@ -84,7 +84,7 @@ const Project = memo(
         <Paper className={classes.paper} elevation={3}>
           <TextField
             id="lastUpdate"
-            label="最后更新"
+            label="项目创建时间"
             variant="outlined"
             size="medium"
             fullWidth

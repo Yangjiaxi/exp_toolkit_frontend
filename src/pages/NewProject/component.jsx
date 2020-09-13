@@ -40,7 +40,6 @@ const NewProject = memo(
           ...rest,
         })),
       };
-      console.log(uploadData);
       createProj(uploadData);
     };
 

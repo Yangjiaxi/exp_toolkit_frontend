@@ -14,7 +14,6 @@ const ProjectList = memo(({ changeBrowserPath, projs, getProj }) => {
     getProj();
   }, [getProj]);
 
-  console.log(projs);
   if (!projs) {
     return <Loading />;
   }
