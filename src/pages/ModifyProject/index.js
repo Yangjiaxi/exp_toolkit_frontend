@@ -8,6 +8,7 @@ import {
   enqueueSnackbar,
   getProjectConfBegin,
   cleanUpConf,
+  modifyProjBegin,
 } from "../../redux/actions";
 
 const mapStateToProps = ({
@@ -27,6 +28,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       changeBrowserPath,
       getProjectConf: getProjectConfBegin,
+      modifyProj: modifyProjBegin,
       enqueueSnackbar,
       cleanUpConf,
     },

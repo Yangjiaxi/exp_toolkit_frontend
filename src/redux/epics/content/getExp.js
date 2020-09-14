@@ -10,29 +10,28 @@ import {
 } from "rxjs/operators";
 
 import {
-  GET_PROJ_INFO_BEGIN,
+  GET_EXP_INFO_BEGIN,
   toggleProgress,
-  getProjInfoFinish,
+  getExpInfoFinish,
 } from "../../actions";
 
 import { API } from "../../const";
 
 import { customError, errHandler } from "..";
 
-export const getProjInfoEpic = (action$) =>
+export const getExpEpic = (action$) =>
   action$.pipe(
-    ofType(GET_PROJ_INFO_BEGIN),
-    mergeMap(({ id }) => {
-      //   const token = checkToken();
-      return ajax.getJSON(`${API}/proj/info/${id}`).pipe(
+    ofType(GET_EXP_INFO_BEGIN),
+    mergeMap(({ expID }) => {
+      return ajax.getJSON(`${API}/exp/info/${expID}`).pipe(
         mergeMap((res) => {
           if (res.type === "success") {
             const { data } = res;
-            return of(getProjInfoFinish(data));
+            return of(getExpInfoFinish(data));
           }
           throw customError(res);
         }),
-        // delay(500),
+        delay(500),
         startWith(toggleProgress(true)),
         endWith(toggleProgress(false)),
         catchError((err) => errHandler(err)),

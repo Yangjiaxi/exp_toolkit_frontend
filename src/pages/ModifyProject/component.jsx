@@ -20,12 +20,9 @@ const ModifyProject = memo(
     fields,
     projConfLoaded,
     cleanUpConf,
+    modifyProj,
   }) => {
     const classes = useStyles();
-
-    // const [projName, setProjName] = useState(title);
-    // const [appendixText, setAppendix] = useState(appendix);
-    // const [schemaData, setSchemaData] = useState(fields);
 
     const [state, setState] = useState({
       projName: title,
@@ -49,17 +46,13 @@ const ModifyProject = memo(
         appendixText: appendix,
         schemaData: fields,
       });
-      // setProjName(title);
-      // setAppendix(appendix);
-      // setSchemaData(fields);
-    }, [title]);
+    }, [title, appendix, fields]);
 
     if (!projConfLoaded) {
       return <Loading />;
     }
 
     const handleChangeName = ({ target: { value } }) => {
-      // setProjName(value);
       setState({
         ...state,
         projName: value,
@@ -67,7 +60,6 @@ const ModifyProject = memo(
     };
 
     const handleAppendix = ({ target: { value } }) => {
-      // setAppendix(value);
       setState({
         ...state,
         appendixText: value,
@@ -80,19 +72,17 @@ const ModifyProject = memo(
         return;
       }
       const uploadData = {
-        id: projectID,
         title: state.projName.trim(),
         appendix: state.appendixText.trim(),
         fields: state.schemaData.map(({ tableData, ...rest }) => ({
           ...rest,
         })),
       };
-      console.log(uploadData);
-      // createProj(uploadData);
+      // console.log(uploadData);
+      modifyProj(projectID, uploadData);
     };
 
     const tableChangeHandler = (newAllData) => {
-      // setSchemaData(newAllData);
       setState({
         ...state,
         schemaData: newAllData,

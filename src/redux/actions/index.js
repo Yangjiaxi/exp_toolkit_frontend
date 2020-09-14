@@ -128,6 +128,18 @@ export const createProjFinish = () => ({
   type: CREATE_PROJECT_FINISH,
 });
 
+export const MODIFY_PROJECT_BEGIN = "MODIFY_PROJECT_BEGIN";
+export const modifyProjBegin = (id, uploadData) => ({
+  type: MODIFY_PROJECT_BEGIN,
+  id,
+  uploadData,
+});
+
+export const MODIFY_PROJECT_FINISH = "MODIFY_PROJECT_FINISH";
+export const modifyProjFinish = () => ({
+  type: MODIFY_PROJECT_FINISH,
+});
+
 export const CLEAN_UP_PROJECT = "CLEAN_UP_PROJECT";
 export const cleanUpProject = () => ({
   type: CLEAN_UP_PROJECT,

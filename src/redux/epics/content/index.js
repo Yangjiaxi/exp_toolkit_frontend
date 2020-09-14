@@ -4,6 +4,7 @@ import { getProjInfoEpic } from "./getProjInfo";
 import { createProjEpic } from "./createProj";
 import { getExpEpic } from "./getExp";
 import { getProjConfEpic } from "./getProjConf";
+import { modifyProjEpic } from "./modifyProj";
 
 export default [
   getProjEpic,
@@ -12,4 +13,5 @@ export default [
   createProjEpic,
   getExpEpic,
   getProjConfEpic,
+  modifyProjEpic,
 ];

@@ -4,7 +4,7 @@ import { of } from "rxjs";
 import { enqueueSnackbar, toggleProgress } from "../actions";
 // import { store } from "../../App";
 
-import projEpic from "./proj";
+import contentEpic from "./content";
 
 export const customError = (error) => {
   const err = new Error(error.message);
@@ -41,4 +41,4 @@ export const epicMiddleware = createEpicMiddleware({
   dependencies,
 });
 
-export const epics = combineEpics(...projEpic);
+export const epics = combineEpics(...contentEpic);
