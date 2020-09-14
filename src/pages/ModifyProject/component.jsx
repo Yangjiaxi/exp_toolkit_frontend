@@ -12,39 +12,44 @@ import useStyles from "./style";
 const ModifyProject = memo(
   ({
     changeBrowserPath,
-    isLoading,
-    createProj,
     enqueueSnackbar,
     getProjectConf,
     projectID,
-    projectData,
+    title,
+    appendix,
+    fields,
+    confLoaded,
   }) => {
-    useEffect(() => {
-      // console.log(projectID);
-      getProjectConf(projectID);
-      // eslint-disable-next-line
-    }, [projectID]);
+    const classes = useStyles();
 
-    if (!projectData) {
+    const [projName, setProjName] = useState("");
+    const [appendixText, setAppendix] = useState("");
+    const [schemaData, setSchemaData] = useState([]);
+
+    useEffect(() => {
+      changeBrowserPath(PAGE_NAME_DICT.MODIFY_PAGE);
+    }, [changeBrowserPath]);
+
+    useEffect(() => {
+      getProjectConf(projectID);
+    }, [projectID, getProjectConf]);
+
+    useEffect(() => {
+      setProjName(title);
+      setAppendix(appendix);
+      setSchemaData(fields);
+    }, [title, appendix, fields]);
+
+    if (!confLoaded) {
       return <Loading />;
     }
 
-    const { projNameRaw, appendixRaw, schemaDataRaw } = projectData;
-
-    const [projName, setProjName] = useState(projNameRaw);
-    const [appendix, setAppendix] = useState(appendixRaw);
-    const [schemaData, setSchemaData] = useState(schemaDataRaw);
-
-    const classes = useStyles();
-
     const handleChangeName = ({ target: { value } }) => {
       setProjName(value);
-      // console.log(projName);
     };
 
     const handleAppendix = ({ target: { value } }) => {
       setAppendix(value);
-      // console.log(projColumns);
     };
 
     const aggregateData = () => {
@@ -53,26 +58,20 @@ const ModifyProject = memo(
         return;
       }
       const uploadData = {
+        id: projectID,
         title: projName.trim(),
         appendix: appendix.trim(),
         fields: schemaData.map(({ tableData, ...rest }) => ({
           ...rest,
         })),
       };
-      createProj(uploadData);
+      console.log(uploadData);
+      // createProj(uploadData);
     };
 
     const tableChangeHandler = (newAllData) => {
       setSchemaData(newAllData);
     };
-
-    useEffect(() => {
-      changeBrowserPath(PAGE_NAME_DICT.NEWPROJECT_PAGE);
-    }, [changeBrowserPath]);
-
-    if (isLoading) {
-      return <Loading />;
-    }
 
     return (
       <Container maxWidth="xl" className={classes.root}>
@@ -105,7 +104,7 @@ const ModifyProject = memo(
           className={classes.appendix}
           multiline
           rows={3}
-          value={appendix}
+          value={appendixText}
           fullWidth
           onChange={handleAppendix}
           variant="outlined"

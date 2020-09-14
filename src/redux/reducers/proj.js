@@ -6,7 +6,12 @@ const init = {
   expInfo: null,
   projID: null,
   expID: null,
-  projectData: null,
+  projectData: {
+    title: "",
+    appendix: "",
+    fields: [],
+  },
+  confLoaded: false,
 };
 
 export const ProjReducer = (state = init, action) => {
@@ -28,7 +33,7 @@ export const ProjReducer = (state = init, action) => {
       return { ...state, expInfo: null };
     case actions.GET_PROJECT_CONF_FINISH:
       const { projectData } = action;
-      return { ...state, projectData };
+      return { ...state, projectData, confLoaded: true };
     default:
       return state;
   }

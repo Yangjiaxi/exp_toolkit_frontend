@@ -5,20 +5,26 @@ import ModifyProject from "./component";
 
 import {
   changeBrowserPath,
-  createProjBegin,
   enqueueSnackbar,
   getProjectConfBegin,
 } from "../../redux/actions";
 
-const mapStateToProps = ({ proj: { projectData } }) => ({
-  projectData,
+const mapStateToProps = ({
+  proj: {
+    projectData: { title, appendix, fields },
+    confLoaded,
+  },
+}) => ({
+  title,
+  appendix,
+  fields,
+  confLoaded,
 });
 
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       changeBrowserPath,
-      createProj: createProjBegin,
       getProjectConf: getProjectConfBegin,
       enqueueSnackbar,
     },

@@ -75,7 +75,6 @@ const Experiment = memo(
     const { projectID, title } = expInfo;
     const { columns, dataNeed } = dataTransform(expInfo);
 
-    console.log(expInfo);
     // const { columns, data } = D;
 
     return (

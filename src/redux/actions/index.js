@@ -145,7 +145,7 @@ export const getProjectConfBegin = (id) => ({
 });
 
 export const GET_PROJECT_CONF_FINISH = "GET_PROJECT_CONF_FINISH";
-export const getProjectConfFinish = (pInfo) => ({
+export const getProjectConfFinish = (projectData) => ({
   type: GET_PROJECT_CONF_FINISH,
-  pInfo,
+  projectData,
 });
