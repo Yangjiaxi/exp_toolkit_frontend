@@ -7,10 +7,12 @@ import {
   ArrowDownward,
   SaveAlt,
 } from "@material-ui/icons";
-import { Button, Grow, Chip } from "@material-ui/core";
+import { Button, Grid, Grow, Typography } from "@material-ui/core";
 
-import MaterialTable, { MTableToolbar } from "material-table";
-import useStyles from "./style";
+import MaterialTable from "material-table";
+import Anchor from "../Anchor";
+
+// import useStyles from "./style";
 
 const tableIcons = {
   NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
@@ -21,8 +23,8 @@ const tableIcons = {
 };
 
 const DataTable = memo((props) => {
-  const { title, columns, data, dataID, pushUrl } = props;
-  const classes = useStyles();
+  const { title, columns, data, dataID, pushUrl, projectID } = props;
+  // const classes = useStyles();
 
   const createClickHandler = (_props) => () => {
     const {
@@ -33,10 +35,31 @@ const DataTable = memo((props) => {
     pushUrl(`/exp/${dataID[id].expID}`);
   };
 
+  const titleComp = (
+    <Grid
+      container
+      alignContent="flex-start"
+      alignItems="center"
+      justify="flex-start"
+      spacing={2}
+    >
+      <Grid item>
+        <Typography display="inline">{title}</Typography>
+      </Grid>
+      <Grid item>
+        <Anchor to={`/modify/${projectID}`}>
+          <Button variant="outlined" size="small" color="secondary">
+            修改
+          </Button>
+        </Anchor>
+      </Grid>
+    </Grid>
+  );
+
   return (
     <Grow in>
       <MaterialTable
-        title={title}
+        title={titleComp}
         columns={columns}
         data={data}
         icons={tableIcons}
@@ -65,19 +88,6 @@ const DataTable = memo((props) => {
           },
         }}
         components={{
-          Toolbar: (props) => (
-            <div>
-              <MTableToolbar {...props} />
-              <Button
-                variant="contained"
-                color="primary"
-                size="medium"
-                className={classes.edit}
-              >
-                编辑
-              </Button>
-            </div>
-          ),
           Action: (_props) => {
             return (
               <Button

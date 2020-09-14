@@ -65,7 +65,8 @@ const Experiment = memo(
     useEffect(() => {
       getInfo(expID);
       return () => cleanUpExperiment();
-    }, [getInfo, expID]);
+      // eslint-disable-next-line
+    }, [expID]);
 
     if (!expInfo) {
       return <Loading />;

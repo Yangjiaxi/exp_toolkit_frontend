@@ -9,13 +9,31 @@ import { PAGE_NAME_DICT } from "../consts";
 
 import useStyles from "./style";
 
-const NewProject = memo(
-  ({ changeBrowserPath, isLoading, createProj, enqueueSnackbar }) => {
-    const [projName, setProjName] = useState("");
-    const [appendix, setAppendix] = useState("");
-    const [schemaData, setSchemaData] = useState([
-      { name: "状态", jsonKey: "status", showInProj: true },
-    ]);
+const ModifyProject = memo(
+  ({
+    changeBrowserPath,
+    isLoading,
+    createProj,
+    enqueueSnackbar,
+    getProjectConf,
+    projectID,
+    projectData,
+  }) => {
+    useEffect(() => {
+      // console.log(projectID);
+      getProjectConf(projectID);
+      // eslint-disable-next-line
+    }, [projectID]);
+
+    if (!projectData) {
+      return <Loading />;
+    }
+
+    const { projNameRaw, appendixRaw, schemaDataRaw } = projectData;
+
+    const [projName, setProjName] = useState(projNameRaw);
+    const [appendix, setAppendix] = useState(appendixRaw);
+    const [schemaData, setSchemaData] = useState(schemaDataRaw);
 
     const classes = useStyles();
 
@@ -49,7 +67,7 @@ const NewProject = memo(
     };
 
     useEffect(() => {
-      changeBrowserPath(PAGE_NAME_DICT.MODIFY_PAGE);
+      changeBrowserPath(PAGE_NAME_DICT.NEWPROJECT_PAGE);
     }, [changeBrowserPath]);
 
     if (isLoading) {
@@ -105,4 +123,4 @@ const NewProject = memo(
   },
 );
 
-export default NewProject;
+export default ModifyProject;

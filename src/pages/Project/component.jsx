@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect } from "react";
 import moment from "moment";
 import {
   Container,
@@ -98,6 +98,7 @@ const Project = memo(
           columns={columns}
           data={dataNeed}
           dataID={dataID}
+          projectID={projectID}
         />
         <Grow in>
           <Paper className={classes.paper} elevation={3}>

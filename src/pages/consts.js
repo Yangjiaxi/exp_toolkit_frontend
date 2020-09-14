@@ -4,6 +4,7 @@ export const PAGE_NAME_DICT = {
   EXPLIST_PAGE: "EXPLIST_PAGE",
   PROJECT_PAGE: "PROJECT_PAGE",
   NEWPROJECT_PAGE: "NEWPROJECT_PAGE",
+  MODIFY_PAGE: "MODIFY_PAGE",
   EXP_PAGE: "EXP_PAGE",
 };
 
@@ -13,5 +14,6 @@ export const PAGE_NAME_DICT_CN = {
   EXPLIST_PAGE: "实验列表",
   PROJECT_PAGE: "项目内容",
   NEWPROJECT_PAGE: "新建项目",
+  MODIFY_PAGE: "修改项目",
   EXP_PAGE: "实验内容",
 };

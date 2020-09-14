@@ -6,6 +6,7 @@ const init = {
   expInfo: null,
   projID: null,
   expID: null,
+  projectData: null,
 };
 
 export const ProjReducer = (state = init, action) => {
@@ -25,6 +26,9 @@ export const ProjReducer = (state = init, action) => {
       return { ...state, info: null };
     case actions.CLEAN_UP_EXPERIMENT:
       return { ...state, expInfo: null };
+    case actions.GET_PROJECT_CONF_FINISH:
+      const { projectData } = action;
+      return { ...state, projectData };
     default:
       return state;
   }

@@ -3,6 +3,7 @@ import { deleteProjEpic } from "./deleteProj";
 import { getProjInfoEpic } from "./getProjInfo";
 import { createProjEpic } from "./createProj";
 import { getExpEpic } from "./getExp";
+import { getProjConfEpic } from "./getProjConf";
 
 export default [
   getProjEpic,
@@ -10,4 +11,5 @@ export default [
   getProjInfoEpic,
   createProjEpic,
   getExpEpic,
+  getProjConfEpic,
 ];

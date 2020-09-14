@@ -137,3 +137,15 @@ export const CLEAN_UP_EXPERIMENT = "CLEAN_UP_EXPERIMENT";
 export const cleanUpExperiment = () => ({
   type: CLEAN_UP_EXPERIMENT,
 });
+
+export const GET_PROJECT_CONF_BEGIN = "GET_PROJECT_CONF_BEGIN";
+export const getProjectConfBegin = (id) => ({
+  type: GET_PROJECT_CONF_BEGIN,
+  id,
+});
+
+export const GET_PROJECT_CONF_FINISH = "GET_PROJECT_CONF_FINISH";
+export const getProjectConfFinish = (pInfo) => ({
+  type: GET_PROJECT_CONF_FINISH,
+  pInfo,
+});

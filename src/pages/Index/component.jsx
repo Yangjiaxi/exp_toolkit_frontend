@@ -19,6 +19,7 @@ const Project = lazy(() => import("../Project"));
 const Experiment = lazy(() => import("../Experiment"));
 
 const NewProject = lazy(() => import("../NewProject"));
+const ModifyProject = lazy(() => import("../ModifyProject"));
 
 const NoMatch = lazy(() => import("../NoMatch"));
 
@@ -73,6 +74,11 @@ const Index = memo(({ themeMode, themeColor }) => {
         <Route path="/" exact render={mainFrame(ProjectList)} />
         <Route path="/about" exact render={mainFrame(About)} />
         <Route path="/create" exact render={mainFrame(NewProject)} />
+        <Route
+          path="/modify/:projectID"
+          exact
+          render={mainFrame(ModifyProject)}
+        />
         <Route path="/proj/:projectID" render={mainFrame(Project)} />
         <Route path="/exp/:expID" render={mainFrame(Experiment)} />
         <Route render={mainFrame(NoMatch)} />
