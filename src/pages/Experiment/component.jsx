@@ -6,32 +6,11 @@ import { ChevronLeft as ChevronLeftIcon } from "@material-ui/icons";
 
 import Loading from "../../components/CircularProgress";
 import DetailTable from "../../components/DetailTable";
+import Anchor from "../../components/Anchor";
 
 import { PAGE_NAME_DICT } from "../consts";
 
 import useStyles from "./style";
-
-const D = {
-  columns: [
-    { title: "Name", field: "name" },
-    { title: "Surname", field: "surname" },
-    { title: "Birth Year", field: "birthYear", type: "numeric" },
-    {
-      title: "Birth Place",
-      field: "birthCity",
-      lookup: { 34: "İstanbul", 63: "Şanlıurfa" },
-    },
-  ],
-  data: [
-    { name: "Mehmet", surname: "Baran", birthYear: 1987, birthCity: 63 },
-    {
-      name: "Zerya Betül",
-      surname: "Baran",
-      birthYear: 2017,
-      birthCity: 34,
-    },
-  ],
-};
 
 const datasPiece = (datas, columns) =>
   datas.reduce(
@@ -58,7 +37,7 @@ const dataTransform = (info) => {
   }));
 
   columns.push({
-    title: "最后更新",
+    title: "提交时间",
     field: `${columns.length}`,
     type: "time",
   });
@@ -67,7 +46,7 @@ const dataTransform = (info) => {
 
   const dataNeed = data.map((ele, index) => ({
     ...dataContent[index],
-    [columns.length - 1]: moment(ele.lastUpdate).fromNow(),
+    [columns.length - 1]: moment(ele.createTime).fromNow(),
   }));
 
   const dataID = data.map((ele) => ({
@@ -76,34 +55,44 @@ const dataTransform = (info) => {
   return { columns, dataNeed, dataID };
 };
 
-const Experiment = memo(({ changeBrowserPath, expInfo, expID, getInfo }) => {
-  const classes = useStyles();
-  useEffect(() => {
-    changeBrowserPath(PAGE_NAME_DICT.EXP_PAGE);
-  }, [changeBrowserPath]);
+const Experiment = memo(
+  ({ changeBrowserPath, expInfo, expID, getInfo, cleanUpExperiment }) => {
+    const classes = useStyles();
+    useEffect(() => {
+      changeBrowserPath(PAGE_NAME_DICT.EXP_PAGE);
+    }, [changeBrowserPath]);
 
-  useEffect(() => {
-    getInfo(expID);
-  }, [getInfo, expID]);
+    useEffect(() => {
+      getInfo(expID);
+      return () => cleanUpExperiment();
+    }, [getInfo, expID]);
 
-  if (!expInfo) {
-    return <Loading />;
-  }
-  const { columns, data } = D;
+    if (!expInfo) {
+      return <Loading />;
+    }
 
-  return (
-    <Container maxWidth="xl" className={classes.root}>
-      <Button
-        variant="outlined"
-        color="primary"
-        className={classes.back}
-        startIcon={<ChevronLeftIcon />}
-      >
-        返回项目
-      </Button>
-      <DetailTable title="11" columns={columns} data={data} />
-    </Container>
-  );
-});
+    const { projectID, title } = expInfo;
+    const { columns, dataNeed } = dataTransform(expInfo);
+
+    console.log(expInfo);
+    // const { columns, data } = D;
+
+    return (
+      <Container maxWidth="xl" className={classes.root}>
+        <Anchor to={`/proj/${projectID}`}>
+          <Button
+            variant="outlined"
+            color="primary"
+            className={classes.back}
+            startIcon={<ChevronLeftIcon />}
+          >
+            返回项目
+          </Button>
+        </Anchor>
+        <DetailTable title={title} columns={columns} data={dataNeed} />
+      </Container>
+    );
+  },
+);
 
 export default Experiment;

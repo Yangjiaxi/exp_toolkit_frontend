@@ -1,12 +1,22 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useState } from "react";
 import moment from "moment";
+import {
+  Container,
+  Paper,
+  TextField,
+  Grow,
+  InputAdornment,
+  IconButton,
+} from "@material-ui/core";
+import copy from "copy-to-clipboard";
 
-import { Container, Paper, TextField, Grow } from "@material-ui/core";
-
+import { FileCopy } from "@material-ui/icons";
 import Loading from "../../components/CircularProgress";
 import DataTable from "../../components/DataTable";
 
 import { PAGE_NAME_DICT } from "../consts";
+
+import { API } from "../../redux/const";
 
 import useStyles from "./style";
 
@@ -54,8 +64,16 @@ const dataTransform = (info) => {
 };
 
 const Project = memo(
-  ({ changeBrowserPath, getInfo, pinfo, projectID, cleanUpProject }) => {
+  ({
+    changeBrowserPath,
+    getInfo,
+    pinfo,
+    projectID,
+    cleanUpProject,
+    enqueueSnackbar,
+  }) => {
     const classes = useStyles();
+
     useEffect(() => {
       changeBrowserPath(PAGE_NAME_DICT.PROJECT_PAGE);
     }, [changeBrowserPath]);
@@ -119,6 +137,58 @@ const Project = memo(
             />
           </Paper>
         </Grow>
+        <Paper className={classes.paper} elevation={3}>
+          <TextField
+            id="address"
+            className={classes.address}
+            label="服务器地址"
+            fullWidth
+            variant="outlined"
+            value={API}
+            InputProps={{
+              readOnly: true,
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => {
+                      copy(API);
+                      enqueueSnackbar("复制地址成功", { variant: "success" });
+                    }}
+                    edge="end"
+                  >
+                    <FileCopy />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+          <TextField
+            id="Id"
+            className={classes.id}
+            label="项目ID"
+            fullWidth
+            value={projectID}
+            variant="outlined"
+            InputProps={{
+              readOnly: true,
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => {
+                      copy(projectID);
+                      enqueueSnackbar("复制ID成功", { variant: "success" });
+                    }}
+                    edge="end"
+                  >
+                    <FileCopy />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+          />
+        </Paper>
       </Container>
     );
   },

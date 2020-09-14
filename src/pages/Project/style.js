@@ -13,6 +13,12 @@ const useStyles = makeStyles(({ spacing }) =>
     appendix: {
       marginTop: spacing(3),
     },
+    address: {
+      // marginTop: spacing(3),
+    },
+    id: {
+      marginTop: spacing(2),
+    },
     input: {
       lineHeight: "1.5em",
       fontSize: "1.3em",

@@ -23,6 +23,8 @@ export const ProjReducer = (state = init, action) => {
       return { ...state, expInfo };
     case actions.CLEAN_UP_PROJECT:
       return { ...state, info: null };
+    case actions.CLEAN_UP_EXPERIMENT:
+      return { ...state, expInfo: null };
     default:
       return state;
   }

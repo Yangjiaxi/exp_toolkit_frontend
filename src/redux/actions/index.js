@@ -132,3 +132,8 @@ export const CLEAN_UP_PROJECT = "CLEAN_UP_PROJECT";
 export const cleanUpProject = () => ({
   type: CLEAN_UP_PROJECT,
 });
+
+export const CLEAN_UP_EXPERIMENT = "CLEAN_UP_EXPERIMENT";
+export const cleanUpExperiment = () => ({
+  type: CLEAN_UP_EXPERIMENT,
+});

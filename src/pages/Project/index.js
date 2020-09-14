@@ -7,6 +7,7 @@ import {
   changeBrowserPath,
   getProjInfoBegin,
   cleanUpProject,
+  enqueueSnackbar,
 } from "../../redux/actions";
 
 const mapStateToProps = ({ proj: { info } }) => ({
@@ -19,6 +20,7 @@ const mapDispatchToProps = (dispatch) =>
       changeBrowserPath,
       cleanUpProject,
       getInfo: getProjInfoBegin,
+      enqueueSnackbar,
     },
     dispatch,
   );

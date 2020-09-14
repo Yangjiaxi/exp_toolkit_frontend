@@ -1,19 +1,28 @@
 import React, { memo, forwardRef } from "react";
 
-import { ChevronRight, Search, Clear, ArrowDownward } from "@material-ui/icons";
-import { Button, Grow } from "@material-ui/core";
+import {
+  ChevronRight,
+  Search,
+  Clear,
+  ArrowDownward,
+  SaveAlt,
+} from "@material-ui/icons";
+import { Button, Grow, Chip } from "@material-ui/core";
 
-import MaterialTable from "material-table";
+import MaterialTable, { MTableToolbar } from "material-table";
+import useStyles from "./style";
 
 const tableIcons = {
   NextPage: forwardRef((props, ref) => <ChevronRight {...props} ref={ref} />),
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+  Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
 };
 
 const DataTable = memo((props) => {
   const { title, columns, data, dataID, pushUrl } = props;
+  const classes = useStyles();
 
   const createClickHandler = (_props) => () => {
     const {
@@ -47,6 +56,7 @@ const DataTable = memo((props) => {
           actionsCellStyle: {
             width: "5em",
           },
+          exportButton: true,
         }}
         localization={{
           header: { actions: "详细" },
@@ -55,6 +65,19 @@ const DataTable = memo((props) => {
           },
         }}
         components={{
+          Toolbar: (props) => (
+            <div>
+              <MTableToolbar {...props} />
+              <Button
+                variant="contained"
+                color="primary"
+                size="medium"
+                className={classes.edit}
+              >
+                编辑
+              </Button>
+            </div>
+          ),
           Action: (_props) => {
             return (
               <Button

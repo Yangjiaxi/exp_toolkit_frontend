@@ -3,7 +3,11 @@ import { bindActionCreators } from "redux";
 
 import Experiment from "./component";
 
-import { changeBrowserPath, getExpInfoBegin } from "../../redux/actions";
+import {
+  changeBrowserPath,
+  getExpInfoBegin,
+  cleanUpExperiment,
+} from "../../redux/actions";
 
 const mapStateToProps = ({ proj: { expInfo } }) => ({
   // isLoading: !id,
@@ -15,6 +19,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       changeBrowserPath,
       getInfo: getExpInfoBegin,
+      cleanUpExperiment,
     },
     dispatch,
   );

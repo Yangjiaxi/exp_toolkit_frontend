@@ -8,6 +8,7 @@ import {
   Search,
   Clear,
   ArrowDownward,
+  SaveAlt,
 } from "@material-ui/icons";
 
 import MaterialTable from "material-table";
@@ -22,6 +23,7 @@ const tableIcons = {
   Search: forwardRef((props, ref) => <Search {...props} ref={ref} />),
   ResetSearch: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
+  Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
 };
 
 const DetailTable = memo(({ title, columns, data }) => {
@@ -36,6 +38,7 @@ const DetailTable = memo(({ title, columns, data }) => {
       }}
       options={{
         paging: false,
+        exportButton: true,
       }}
     />
   );
