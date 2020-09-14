@@ -5,7 +5,7 @@ import Loading from "../../components/CircularProgress";
 
 import { PAGE_NAME_DICT } from "../consts";
 
-const ProjectList = memo(({ changeBrowserPath, projs, getProj }) => {
+const ProjectList = memo(({ changeBrowserPath, projList, getProj }) => {
   useEffect(() => {
     changeBrowserPath(PAGE_NAME_DICT.EXPLIST_PAGE);
   }, [changeBrowserPath]);
@@ -14,11 +14,11 @@ const ProjectList = memo(({ changeBrowserPath, projs, getProj }) => {
     getProj();
   }, [getProj]);
 
-  if (!projs) {
+  if (!projList) {
     return <Loading />;
   }
 
-  const projects = projs || [];
+  const projects = projList || [];
   const sortedProjects = projects.sort(
     ({ lastUse: a }, { lastUse: b }) => b - a,
   );

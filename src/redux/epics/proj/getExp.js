@@ -31,7 +31,7 @@ export const getExpEpic = (action$) =>
           }
           throw customError(res);
         }),
-        delay(500),
+        // delay(500),
         startWith(toggleProgress(true)),
         endWith(toggleProgress(false)),
         catchError((err) => errHandler(err)),

@@ -21,12 +21,10 @@ const NewProject = memo(
 
     const handleChangeName = ({ target: { value } }) => {
       setProjName(value);
-      // console.log(projName);
     };
 
     const handleAppendix = ({ target: { value } }) => {
       setAppendix(value);
-      // console.log(projColumns);
     };
 
     const aggregateData = () => {

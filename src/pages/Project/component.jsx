@@ -67,7 +67,7 @@ const Project = memo(
   ({
     changeBrowserPath,
     getInfo,
-    pinfo,
+    projInfo,
     projectID,
     cleanUpProject,
     enqueueSnackbar,
@@ -80,16 +80,17 @@ const Project = memo(
 
     useEffect(() => {
       getInfo(projectID);
-      return () => cleanUpProject();
+      return () => {
+        cleanUpProject();
+      };
       // eslint-disable-next-line
     }, [projectID]);
 
-    if (!pinfo) {
+    if (!projInfo) {
       return <Loading />;
     }
-    // console.log(pinfo);
-    const { projectName, appendix, createTime } = pinfo;
-    const { columns, dataNeed, dataID } = dataTransform(pinfo);
+    const { projectName, appendix, createTime } = projInfo;
+    const { columns, dataNeed, dataID } = dataTransform(projInfo);
 
     return (
       <Container maxWidth="xl" className={classes.root}>

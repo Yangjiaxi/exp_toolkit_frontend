@@ -9,7 +9,7 @@ import {
   cleanUpExperiment,
 } from "../../redux/actions";
 
-const mapStateToProps = ({ proj: { expInfo } }) => ({
+const mapStateToProps = ({ content: { expInfo } }) => ({
   // isLoading: !id,
   expInfo,
 });

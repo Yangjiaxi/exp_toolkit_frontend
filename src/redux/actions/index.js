@@ -77,9 +77,9 @@ export const getProjBegin = () => ({
 });
 
 export const GET_PROJECT_FINISH = "GET_PROJECT_FINISH";
-export const getProjFinish = (projs) => ({
+export const getProjFinish = (projList) => ({
   type: GET_PROJECT_FINISH,
-  projs,
+  projList,
 });
 
 export const DELELE_PROJECT_BEGIN = "DELETE_PROJECT_BEGIN";
@@ -145,7 +145,12 @@ export const getProjectConfBegin = (id) => ({
 });
 
 export const GET_PROJECT_CONF_FINISH = "GET_PROJECT_CONF_FINISH";
-export const getProjectConfFinish = (projectData) => ({
+export const getProjectConfFinish = (projConf) => ({
   type: GET_PROJECT_CONF_FINISH,
-  projectData,
+  projConf,
+});
+
+export const CLEAN_UP_CONF = "CLEAN_UP_CONF";
+export const cleanUpConf = () => ({
+  type: CLEAN_UP_CONF,
 });

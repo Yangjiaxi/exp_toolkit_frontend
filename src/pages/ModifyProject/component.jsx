@@ -18,13 +18,20 @@ const ModifyProject = memo(
     title,
     appendix,
     fields,
-    confLoaded,
+    projConfLoaded,
+    cleanUpConf,
   }) => {
     const classes = useStyles();
 
-    const [projName, setProjName] = useState("");
-    const [appendixText, setAppendix] = useState("");
-    const [schemaData, setSchemaData] = useState([]);
+    // const [projName, setProjName] = useState(title);
+    // const [appendixText, setAppendix] = useState(appendix);
+    // const [schemaData, setSchemaData] = useState(fields);
+
+    const [state, setState] = useState({
+      projName: title,
+      appendixText: appendix,
+      schemaData: fields,
+    });
 
     useEffect(() => {
       changeBrowserPath(PAGE_NAME_DICT.MODIFY_PAGE);
@@ -32,36 +39,51 @@ const ModifyProject = memo(
 
     useEffect(() => {
       getProjectConf(projectID);
-    }, [projectID, getProjectConf]);
+      return () => cleanUpConf();
+      // eslint-disable-next-line
+    }, [projectID]);
 
     useEffect(() => {
-      setProjName(title);
-      setAppendix(appendix);
-      setSchemaData(fields);
-    }, [title, appendix, fields]);
+      setState({
+        projName: title,
+        appendixText: appendix,
+        schemaData: fields,
+      });
+      // setProjName(title);
+      // setAppendix(appendix);
+      // setSchemaData(fields);
+    }, [title]);
 
-    if (!confLoaded) {
+    if (!projConfLoaded) {
       return <Loading />;
     }
 
     const handleChangeName = ({ target: { value } }) => {
-      setProjName(value);
+      // setProjName(value);
+      setState({
+        ...state,
+        projName: value,
+      });
     };
 
     const handleAppendix = ({ target: { value } }) => {
-      setAppendix(value);
+      // setAppendix(value);
+      setState({
+        ...state,
+        appendixText: value,
+      });
     };
 
     const aggregateData = () => {
-      if (projName.trim() === "") {
+      if (state.projName.trim() === "") {
         enqueueSnackbar("项目名称不能为空", { variant: "error" });
         return;
       }
       const uploadData = {
         id: projectID,
-        title: projName.trim(),
-        appendix: appendix.trim(),
-        fields: schemaData.map(({ tableData, ...rest }) => ({
+        title: state.projName.trim(),
+        appendix: state.appendixText.trim(),
+        fields: state.schemaData.map(({ tableData, ...rest }) => ({
           ...rest,
         })),
       };
@@ -70,7 +92,11 @@ const ModifyProject = memo(
     };
 
     const tableChangeHandler = (newAllData) => {
-      setSchemaData(newAllData);
+      // setSchemaData(newAllData);
+      setState({
+        ...state,
+        schemaData: newAllData,
+      });
     };
 
     return (
@@ -80,7 +106,7 @@ const ModifyProject = memo(
           label="项目名称"
           helperText="请输入项目名称"
           className={classes.projectName}
-          value={projName}
+          value={state.projName}
           onChange={handleChangeName}
           size="medium"
           fullWidth
@@ -94,7 +120,7 @@ const ModifyProject = memo(
         />
         <SchemaTable
           title="项目数据列"
-          data={schemaData}
+          data={state.schemaData}
           onChange={tableChangeHandler}
         />
         <TextField
@@ -104,7 +130,7 @@ const ModifyProject = memo(
           className={classes.appendix}
           multiline
           rows={3}
-          value={appendixText}
+          value={state.appendixText}
           fullWidth
           onChange={handleAppendix}
           variant="outlined"

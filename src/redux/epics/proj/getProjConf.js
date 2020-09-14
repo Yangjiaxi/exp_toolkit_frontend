@@ -32,7 +32,7 @@ export const getProjConfEpic = (action$) =>
           }
           throw customError(res);
         }),
-        delay(500),
+        // delay(1000),
         startWith(toggleProgress(true)),
         endWith(toggleProgress(false)),
         catchError((err) => errHandler(err)),

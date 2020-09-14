@@ -10,8 +10,8 @@ import {
   enqueueSnackbar,
 } from "../../redux/actions";
 
-const mapStateToProps = ({ proj: { info } }) => ({
-  pinfo: info,
+const mapStateToProps = ({ content: { projInfo } }) => ({
+  projInfo,
 });
 
 const mapDispatchToProps = (dispatch) =>

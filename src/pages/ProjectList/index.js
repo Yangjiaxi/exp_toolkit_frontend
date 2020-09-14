@@ -6,8 +6,8 @@ import { changeBrowserPath, getProjBegin } from "../../redux/actions";
 
 import ProjectList from "./component";
 
-const mapStateToProps = ({ proj: { projs } }) => ({
-  projs,
+const mapStateToProps = ({ content: { projList } }) => ({
+  projList,
 });
 
 const mapDispatchToProps = (dispatch) =>
