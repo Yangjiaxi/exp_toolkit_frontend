@@ -96,7 +96,7 @@ const Project = memo(
       <Container maxWidth="xl" className={classes.root}>
         <DataTable
           title={`${projectName}`}
-          columns={columns}
+          columns={columns.map((c) => ({ ...c, tableData: undefined }))}
           data={dataNeed}
           dataID={dataID}
           projectID={projectID}
@@ -139,58 +139,60 @@ const Project = memo(
             />
           </Paper>
         </Grow>
-        <Paper className={classes.paper} elevation={3}>
-          <TextField
-            id="address"
-            className={classes.address}
-            label="服务器地址"
-            fullWidth
-            variant="outlined"
-            value={API}
-            InputProps={{
-              readOnly: true,
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={() => {
-                      copy(API);
-                      enqueueSnackbar("复制地址成功", { variant: "success" });
-                    }}
-                    edge="end"
-                  >
-                    <FileCopy />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-          <TextField
-            id="Id"
-            className={classes.id}
-            label="项目ID"
-            fullWidth
-            value={projectID}
-            variant="outlined"
-            InputProps={{
-              readOnly: true,
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={() => {
-                      copy(projectID);
-                      enqueueSnackbar("复制ID成功", { variant: "success" });
-                    }}
-                    edge="end"
-                  >
-                    <FileCopy />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Paper>
+        <Grow in>
+          <Paper className={classes.paper} elevation={3}>
+            <TextField
+              id="address"
+              className={classes.address}
+              label="服务器地址"
+              fullWidth
+              variant="outlined"
+              value={API}
+              InputProps={{
+                readOnly: true,
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => {
+                        copy(API);
+                        enqueueSnackbar("复制地址成功", { variant: "success" });
+                      }}
+                      edge="end"
+                    >
+                      <FileCopy />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <TextField
+              id="Id"
+              className={classes.id}
+              label="项目ID"
+              fullWidth
+              value={projectID}
+              variant="outlined"
+              InputProps={{
+                readOnly: true,
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => {
+                        copy(projectID);
+                        enqueueSnackbar("复制ID成功", { variant: "success" });
+                      }}
+                      edge="end"
+                    >
+                      <FileCopy />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            />
+          </Paper>
+        </Grow>
       </Container>
     );
   },

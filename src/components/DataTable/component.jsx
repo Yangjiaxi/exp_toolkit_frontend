@@ -1,4 +1,4 @@
-import React, { memo, forwardRef } from "react";
+import React, { memo, forwardRef, useState } from "react";
 
 import {
   ChevronRight,
@@ -24,6 +24,7 @@ const tableIcons = {
 
 const DataTable = memo((props) => {
   const { title, columns, data, dataID, pushUrl, projectID } = props;
+  const [isDense, setDense] = useState(false);
   // const classes = useStyles();
 
   const createClickHandler = (_props) => () => {
@@ -44,7 +45,9 @@ const DataTable = memo((props) => {
       spacing={2}
     >
       <Grid item>
-        <Typography display="inline">{title}</Typography>
+        <Typography display="inline" variant="h6">
+          {title}
+        </Typography>
       </Grid>
       <Grid item>
         <Anchor to={`/modify/${projectID}`}>
@@ -53,6 +56,16 @@ const DataTable = memo((props) => {
           </Button>
         </Anchor>
       </Grid>
+      <Grid item>
+        <Button
+          variant="outlined"
+          size="small"
+          color="secondary"
+          onClick={() => setDense(!isDense)}
+        >
+          {`窄行：${isDense ? "开" : "关"}`}
+        </Button>
+      </Grid>
     </Grid>
   );
 
@@ -60,7 +73,8 @@ const DataTable = memo((props) => {
     <Grow in>
       <MaterialTable
         title={titleComp}
-        columns={columns}
+        // columns={columns}
+        columns={columns.map((c) => ({ ...c, tableData: undefined }))}
         data={data}
         icons={tableIcons}
         style={{
@@ -74,6 +88,8 @@ const DataTable = memo((props) => {
           },
         ]}
         options={{
+          search: false,
+          padding: isDense ? "dense" : "default",
           actionsColumnIndex: -1,
           paging: false,
           actionsCellStyle: {
@@ -96,7 +112,7 @@ const DataTable = memo((props) => {
                 variant="outlined"
                 size="small"
               >
-                <ChevronRight />
+                <ChevronRight fontSize="small" />
               </Button>
             );
           },

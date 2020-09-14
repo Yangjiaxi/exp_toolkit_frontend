@@ -1,4 +1,4 @@
-import React, { memo, forwardRef } from "react";
+import React, { memo, forwardRef, useState } from "react";
 
 import {
   FirstPage,
@@ -12,6 +12,7 @@ import {
 } from "@material-ui/icons";
 
 import MaterialTable from "material-table";
+import { Button, Grid, Grow, Typography } from "@material-ui/core";
 
 const tableIcons = {
   FirstPage: forwardRef((props, ref) => <FirstPage {...props} ref={ref} />),
@@ -27,20 +28,52 @@ const tableIcons = {
 };
 
 const DetailTable = memo(({ title, columns, data }) => {
+  const [isDense, setDense] = useState(false);
+
+  const titleComp = (
+    <Grid
+      container
+      alignContent="flex-start"
+      alignItems="center"
+      justify="flex-start"
+      spacing={2}
+    >
+      <Grid item>
+        <Typography display="inline" variant="h6">
+          {title}
+        </Typography>
+      </Grid>
+      <Grid item>
+        <Button
+          variant="outlined"
+          size="small"
+          color="secondary"
+          onClick={() => setDense(!isDense)}
+        >
+          {`窄行：${isDense ? "开" : "关"}`}
+        </Button>
+      </Grid>
+    </Grid>
+  );
+
   return (
-    <MaterialTable
-      title={title}
-      columns={columns}
-      data={data}
-      icons={tableIcons}
-      style={{
-        padding: "1em",
-      }}
-      options={{
-        paging: false,
-        exportButton: true,
-      }}
-    />
+    <Grow in>
+      <MaterialTable
+        title={titleComp}
+        columns={columns.map((c) => ({ ...c, tableData: undefined }))}
+        data={data}
+        icons={tableIcons}
+        style={{
+          padding: "1em",
+        }}
+        options={{
+          padding: isDense ? "dense" : "default",
+          paging: false,
+          exportButton: true,
+          search: false,
+        }}
+      />
+    </Grow>
   );
 });
 

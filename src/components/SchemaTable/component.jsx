@@ -89,7 +89,7 @@ const SchemaTable = memo(({ title, onChange, data }) => {
   return (
     <MaterialTable
       title={title}
-      columns={columns}
+      columns={columns.map((c) => ({ ...c, tableData: undefined }))}
       data={data}
       icons={tableIcons}
       options={{

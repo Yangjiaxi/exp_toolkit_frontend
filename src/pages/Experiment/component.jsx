@@ -89,7 +89,11 @@ const Experiment = memo(
             返回项目
           </Button>
         </Anchor>
-        <DetailTable title={title} columns={columns} data={dataNeed} />
+        <DetailTable
+          title={title}
+          columns={columns.map((c) => ({ ...c, tableData: undefined }))}
+          data={dataNeed}
+        />
       </Container>
     );
   },
