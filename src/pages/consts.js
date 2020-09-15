@@ -6,6 +6,8 @@ export const PAGE_NAME_DICT = {
   NEWPROJECT_PAGE: "NEWPROJECT_PAGE",
   MODIFY_PAGE: "MODIFY_PAGE",
   EXP_PAGE: "EXP_PAGE",
+  REGISTER_PAGE: "REGISTER_PAGE",
+  LOGIN_PAGE: "LOGIN_PAGE",
 };
 
 export const PAGE_NAME_DICT_CN = {
@@ -16,4 +18,6 @@ export const PAGE_NAME_DICT_CN = {
   NEWPROJECT_PAGE: "新建项目",
   MODIFY_PAGE: "修改项目",
   EXP_PAGE: "实验内容",
+  REGISTER_PAGE: "新用户注册",
+  LOGIN_PAGE: "用户登录",
 };

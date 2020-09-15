@@ -166,3 +166,31 @@ export const CLEAN_UP_CONF = "CLEAN_UP_CONF";
 export const cleanUpConf = () => ({
   type: CLEAN_UP_CONF,
 });
+
+// ------------ User Action ------------
+
+export const LOGIN = "LOGIN";
+export const login = (token) => ({
+  type: LOGIN,
+  token,
+});
+
+export const LOGOUT = "LOGOUT";
+export const logout = () => ({
+  type: LOGOUT,
+});
+
+export const LOGIN_START = "LOGIN_START";
+export const loginStart = (email, password) => ({
+  type: LOGIN_START,
+  email,
+  password,
+});
+
+export const REGISTER_START = "REGISTER_START";
+export const registerStart = (username, email, password) => ({
+  type: REGISTER_START,
+  username,
+  email,
+  password,
+});

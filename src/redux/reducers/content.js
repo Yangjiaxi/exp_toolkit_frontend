@@ -18,7 +18,7 @@ const init = {
   expInfo: null,
 };
 
-export const ContentReducer = (state = init, action) => {
+export const contentReducer = (state = init, action) => {
   switch (action.type) {
     case actions.GET_PROJECT_FINISH:
       const { projList } = action;
@@ -53,4 +53,4 @@ export const ContentReducer = (state = init, action) => {
   }
 };
 
-export default ContentReducer;
+export default contentReducer;

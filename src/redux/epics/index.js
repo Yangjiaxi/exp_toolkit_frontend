@@ -2,9 +2,10 @@ import { combineEpics, createEpicMiddleware } from "redux-observable";
 import { of } from "rxjs";
 
 import { enqueueSnackbar, toggleProgress } from "../actions";
-// import { store } from "../../App";
+import { store } from "../../App";
 
 import contentEpic from "./content";
+import userEpic from "./user";
 
 export const customError = (error) => {
   const err = new Error(error.message);
@@ -12,13 +13,13 @@ export const customError = (error) => {
   return err;
 };
 
-// export const checkToken = () => {
-//   const { token } = store.getState().user;
-//   if (!token) {
-//     throw customError({ message: i18nHelper.NO_JWT });
-//   }
-//   return token;
-// };
+export const checkToken = () => {
+  const { token } = store.getState().user;
+  if (!token) {
+    throw customError({ message: "No JWT provided." });
+  }
+  return token;
+};
 
 export const errHandler = ({ message, type }, customAction) => {
   if (customAction) {
@@ -41,4 +42,4 @@ export const epicMiddleware = createEpicMiddleware({
   dependencies,
 });
 
-export const epics = combineEpics(...contentEpic);
+export const epics = combineEpics(...contentEpic, ...userEpic);

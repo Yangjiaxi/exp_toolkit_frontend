@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import { bindActionCreators } from "redux";
 
-import { toggleSlider } from "../../redux/actions";
+import { toggleSlider, logout } from "../../redux/actions";
 
 import AppBar from "./component";
 
@@ -18,6 +18,7 @@ const mapDispatchToProps = (dispatch) =>
   bindActionCreators(
     {
       toggleSlider,
+      logout,
     },
     dispatch,
   );

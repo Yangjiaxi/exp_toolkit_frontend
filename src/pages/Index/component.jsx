@@ -1,29 +1,33 @@
 import React, { memo, Suspense, lazy } from "react";
 import { Route, Switch, withRouter } from "react-router";
+import Helmet from "react-helmet";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 
+import { PAGE_NAME_DICT_CN } from "../consts";
 import { colorDict } from "../../utils/color";
 
 import Progress from "../../components/Progress";
 import PageFrame from "../../components/Frame";
-// import MiniFrame from "../../components/MiniFrame";
+import MiniFrame from "../../components/MiniFrame";
 import Notifier from "../../components/Notifier";
 import Snackbar from "../../components/Snackbar";
+
+const Login = lazy(() => import("../Login"));
+const Register = lazy(() => import("../Register"));
 
 const ProjectList = lazy(() => import("../ProjectList"));
 const About = lazy(() => import("../About"));
 const Project = lazy(() => import("../Project"));
 const Experiment = lazy(() => import("../Experiment"));
-
 const NewProject = lazy(() => import("../NewProject"));
 const ModifyProject = lazy(() => import("../ModifyProject"));
 
 const NoMatch = lazy(() => import("../NoMatch"));
 
-const Index = memo(({ themeMode, themeColor }) => {
+const Index = memo(({ themeMode, themeColor, pageName }) => {
   const mainFrame = (Component) => (props) => {
     const {
       match: {
@@ -41,13 +45,13 @@ const Index = memo(({ themeMode, themeColor }) => {
       </PageFrame>
     );
   };
-  // const miniFrame = (Component) => () => (
-  //   <MiniFrame>
-  //     <Suspense fallback={<Progress />}>
-  //       <Component />
-  //     </Suspense>
-  //   </MiniFrame>
-  // );
+  const miniFrame = (Component) => () => (
+    <MiniFrame>
+      <Suspense fallback={<Progress />}>
+        <Component />
+      </Suspense>
+    </MiniFrame>
+  );
   /**
    * MiniFrame主要负责注册与登陆，不需要获得路由参数
    * MainFrame主要负责登陆后的逻辑，有可能需要获得URL路由参数
@@ -64,13 +68,25 @@ const Index = memo(({ themeMode, themeColor }) => {
     },
   });
 
+  const pageNameCN = PAGE_NAME_DICT_CN[pageName] || pageName;
+
   return (
     <MuiThemeProvider theme={theme}>
+      <Helmet>
+        <meta
+          name="theme-color"
+          content={colorDict[themeColor][500]}
+          data-react-helmet="true"
+        />
+        <title>{pageNameCN}</title>
+      </Helmet>
       <CssBaseline />
       <Snackbar>
         <Notifier />
       </Snackbar>
       <Switch>
+        <Route path="/login" exact render={miniFrame(Login)} />
+        <Route path="/register" exact render={miniFrame(Register)} />
         <Route path="/" exact render={mainFrame(ProjectList)} />
         <Route path="/about" exact render={mainFrame(About)} />
         <Route path="/create" exact render={mainFrame(NewProject)} />

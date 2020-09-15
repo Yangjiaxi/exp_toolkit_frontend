@@ -2,12 +2,13 @@ import { combineReducers } from "redux";
 
 import { connectRouter } from "connected-react-router";
 import { componentReducer } from "./component";
-
-import { ContentReducer } from "./content";
+import { contentReducer } from "./content";
+import { userReducer } from "./user";
 
 export const rootReducers = (history) =>
   combineReducers({
     component: componentReducer,
-    content: ContentReducer,
+    content: contentReducer,
+    user: userReducer,
     router: connectRouter(history),
   });
