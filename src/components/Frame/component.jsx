@@ -13,7 +13,7 @@ import useStyles from "./style";
 
 const Frame = memo(
   ({ children, isLoading, toggleSlider, detectWidth, loggedIn }) => {
-    console.log("Token: ", loggedIn);
+    // console.log("Token: ", loggedIn);
     const classes = useStyles();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("xs"));

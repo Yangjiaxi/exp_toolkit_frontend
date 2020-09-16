@@ -11,8 +11,8 @@ const init = {
   info: null,
 };
 
-console.log("Init: ");
-console.log(init);
+// console.log("Init: ");
+// console.log(init);
 
 export const userReducer = (state = init, action) => {
   switch (action.type) {
