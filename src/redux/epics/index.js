@@ -1,6 +1,8 @@
 import { combineEpics, createEpicMiddleware } from "redux-observable";
 import { of } from "rxjs";
 
+import { push } from "connected-react-router";
+
 import { enqueueSnackbar, toggleProgress } from "../actions";
 import { store } from "../../App";
 
@@ -24,12 +26,14 @@ export const checkToken = () => {
 export const errHandler = ({ message, type }, customAction) => {
   if (customAction) {
     return of(
+      push("/404"),
       toggleProgress(false),
       enqueueSnackbar(message, { variant: type || "error" }),
       customAction,
     );
   }
   return of(
+    push("/404"),
     toggleProgress(false),
     enqueueSnackbar(message, { variant: type || "error" }),
   );

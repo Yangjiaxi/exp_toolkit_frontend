@@ -1,42 +1,35 @@
 import { ofType } from "redux-observable";
 import { of } from "rxjs";
 import { ajax } from "rxjs/ajax";
-import {
-  catchError,
-  mergeMap,
-  startWith,
-  endWith,
-  delay,
-} from "rxjs/operators";
+import { catchError, mergeMap, startWith, endWith } from "rxjs/operators";
 
 import {
-  GET_PROJ_INFO_BEGIN,
+  GET_USER_INFO_BEGIN,
   toggleProgress,
-  getProjInfoFinish,
+  getUserInfoFinish,
 } from "../../actions";
 
 import { API } from "../../const";
 
-import { customError, errHandler, checkToken } from "..";
+import { checkToken, customError, errHandler } from "..";
 
-export const getProjInfoEpic = (action$) =>
+export const getInfoEpic = (action$) =>
   action$.pipe(
-    ofType(GET_PROJ_INFO_BEGIN),
-    mergeMap(({ id }) => {
+    ofType(GET_USER_INFO_BEGIN),
+    mergeMap(() => {
       const token = checkToken();
       return ajax
-        .getJSON(`${API}/proj/info/${id}`, { Authorization: `Bearer ${token}` })
+        .getJSON(`${API}/user/info`, { Authorization: `Bearer ${token}` })
         .pipe(
           mergeMap((res) => {
             if (res.type === "success") {
               const { data } = res;
-              return of(getProjInfoFinish(data));
+              return of(getUserInfoFinish(data));
             }
             throw customError(res);
           }),
-          delay(500),
           startWith(toggleProgress(true)),
-          endWith(toggleProgress(false)),
+          endWith(toggleProgress()),
           catchError((err) => errHandler(err)),
         );
     }),

@@ -10,85 +10,112 @@ import Anchor from "../../components/Anchor";
 import useStyles from "./style";
 import { PAGE_NAME_DICT } from "../consts";
 
-const Login = memo(({ loggedIn, login, isLoading, changeBrowserPath }) => {
-  const classes = useStyles();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const Login = memo(
+  ({ loggedIn, login, isLoading, changeBrowserPath, enqueueSnackbar }) => {
+    const classes = useStyles();
+    // const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [username, setName] = useState("");
 
-  useEffect(() => {
-    changeBrowserPath(PAGE_NAME_DICT.LOGIN_PAGE);
-  }, [changeBrowserPath]);
+    useEffect(() => {
+      changeBrowserPath(PAGE_NAME_DICT.LOGIN_PAGE);
+    }, [changeBrowserPath]);
 
-  if (loggedIn) {
-    return <Redirect to="/" />;
-  }
-  const handleLogin = () => {
-    login(email, password);
-  };
+    if (loggedIn) {
+      return <Redirect to="/" />;
+    }
 
-  const handlePassword = ({ target: { value } }) => {
-    setPassword(value);
-  };
+    const checkValid = () => {
+      if (username.trim().length === 0) {
+        enqueueSnackbar("用户名不能为空", {
+          variant: "error",
+        });
+        return false;
+      }
+      if (password.trim().length === 0) {
+        enqueueSnackbar("密码不能为空", {
+          variant: "error",
+        });
+        return false;
+      }
+      return true;
+    };
 
-  const handleEmail = ({ target: { value } }) => {
-    setEmail(value);
-  };
+    const handleLogin = () => {
+      login(username, password);
+    };
 
-  return (
-    <>
-      <Avatar className={classes.avatar}>
-        <Lock />
-      </Avatar>
-      <Typography variant="h6" gutterBottom>
-        密码
-      </Typography>
-      <form className={classes.form}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField
-              label="邮箱"
-              variant="outlined"
-              fullWidth
-              required
-              value={email}
-              autoComplete="email"
-              onChange={handleEmail}
-            />
+    const handlePassword = ({ target: { value } }) => {
+      setPassword(value);
+    };
+
+    const handlePressEnter = ({ keyCode }) => {
+      if (keyCode === 13) {
+        if (checkValid()) {
+          handleLogin();
+        }
+      }
+    };
+    const handleName = ({ target: { value } }) => {
+      setName(value);
+    };
+    return (
+      <>
+        <Avatar className={classes.avatar}>
+          <Lock />
+        </Avatar>
+        <Typography variant="h6" gutterBottom>
+          登录
+        </Typography>
+        <form className={classes.form}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                label="用户名"
+                variant="outlined"
+                fullWidth
+                required
+                value={username}
+                autoComplete="username"
+                onChange={handleName}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                label="密码"
+                variant="outlined"
+                fullWidth
+                required
+                value={password}
+                type="password"
+                autoComplete="current-password"
+                onChange={handlePassword}
+                onKeyDown={handlePressEnter}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                variant="contained"
+                fullWidth
+                color="primary"
+                size="large"
+                onClick={handleLogin}
+                disabled={!username || !password}
+              >
+                登录
+              </Button>
+            </Grid>
+            <Grid item container justify="flex-end">
+              <Anchor to="/register">
+                <Typography color="primary">注册</Typography>
+              </Anchor>
+            </Grid>
           </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label="密码"
-              variant="outlined"
-              fullWidth
-              required
-              value={password}
-              type="password"
-              autoComplete="current-password"
-              onChange={handlePassword}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <Button
-              variant="contained"
-              fullWidth
-              color="primary"
-              size="large"
-              onClick={handleLogin}
-              disabled={!email || !password}
-            >
-              登录
-            </Button>
-          </Grid>
-          <Grid item container justify="flex-end">
-            <Anchor to="/register">
-              <Typography color="primary">注册</Typography>
-            </Anchor>
-          </Grid>
-        </Grid>
-      </form>
-      {isLoading && <Progress />}
-    </>
-  );
-});
+        </form>
+        {isLoading && <Progress />}
+      </>
+    );
+  },
+);
 
 export default Login;

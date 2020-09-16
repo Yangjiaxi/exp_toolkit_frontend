@@ -24,6 +24,7 @@ const Project = lazy(() => import("../Project"));
 const Experiment = lazy(() => import("../Experiment"));
 const NewProject = lazy(() => import("../NewProject"));
 const ModifyProject = lazy(() => import("../ModifyProject"));
+const Profile = lazy(() => import("../Profile"));
 
 const NoMatch = lazy(() => import("../NoMatch"));
 
@@ -97,6 +98,7 @@ const Index = memo(({ themeMode, themeColor, pageName }) => {
         />
         <Route path="/proj/:projectID" render={mainFrame(Project)} />
         <Route path="/exp/:expID" render={mainFrame(Experiment)} />
+        <Route path="/profile" exact render={mainFrame(Profile)} />
         <Route render={mainFrame(NoMatch)} />
       </Switch>
     </MuiThemeProvider>

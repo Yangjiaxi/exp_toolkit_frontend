@@ -13,29 +13,33 @@ import {
 
 import { API } from "../../const";
 
-import { customError, errHandler } from "..";
+import { customError, errHandler, checkToken } from "..";
 
 export const deleteProjEpic = (action$) =>
   action$.pipe(
     ofType(DELELE_PROJECT_BEGIN),
     mergeMap(({ id }) => {
-      //   const token = checkToken();
-      return ajax.delete(`${API}/proj/delete/${id}`).pipe(
-        mergeMap(({ response: res }) => {
-          const { type } = res;
-          if (type === "success") {
-            return of(
-              enqueueSnackbar("删除成功", { variant: "success" }),
-              deleteProjFinish(),
-              getProjBegin(), // pull again
-            );
-          }
-          throw customError(res);
-        }),
-        startWith(toggleProgress(true)),
-        endWith(toggleProgress(false)),
-        catchError((err) => errHandler(err)),
-      );
+      const token = checkToken();
+      return ajax
+        .delete(`${API}/proj/delete/${id}`, {
+          Authorization: `Bearer ${token}`,
+        })
+        .pipe(
+          mergeMap(({ response: res }) => {
+            const { type } = res;
+            if (type === "success") {
+              return of(
+                enqueueSnackbar("删除成功", { variant: "success" }),
+                deleteProjFinish(),
+                getProjBegin(), // pull again
+              );
+            }
+            throw customError(res);
+          }),
+          startWith(toggleProgress(true)),
+          endWith(toggleProgress(false)),
+          catchError((err) => errHandler(err)),
+        );
     }),
     catchError((err) => errHandler(err)),
   );

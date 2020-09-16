@@ -5,7 +5,7 @@ import { catchError, mergeMap, startWith, endWith } from "rxjs/operators";
 
 import {
   login,
-  LOGIN_START,
+  LOGIN_BEGIN,
   toggleProgress,
   enqueueSnackbar,
 } from "../../actions";
@@ -16,13 +16,13 @@ import { customError, errHandler } from "..";
 
 export const loginEpic = (action$) =>
   action$.pipe(
-    ofType(LOGIN_START),
-    mergeMap(({ email, password }) =>
+    ofType(LOGIN_BEGIN),
+    mergeMap(({ username, password }) =>
       ajax
         .post(
           `${API}/user/login`,
           JSON.stringify({
-            email,
+            username,
             password,
           }),
           { "Content-Type": "application/json" },

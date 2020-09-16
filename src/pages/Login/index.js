@@ -1,7 +1,11 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import { loginStart, changeBrowserPath } from "../../redux/actions";
+import {
+  loginStart,
+  changeBrowserPath,
+  enqueueSnackbar,
+} from "../../redux/actions";
 
 import Login from "./component";
 
@@ -19,6 +23,7 @@ const mapDispatchToProps = (dispatch) =>
     {
       login: loginStart,
       changeBrowserPath,
+      enqueueSnackbar,
     },
     dispatch,
   );

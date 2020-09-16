@@ -5,7 +5,7 @@ import { catchError, mergeMap, startWith, endWith } from "rxjs/operators";
 
 import { push } from "connected-react-router";
 
-import { REGISTER_START, toggleProgress, enqueueSnackbar } from "../../actions";
+import { REGISTER_BEGIN, toggleProgress, enqueueSnackbar } from "../../actions";
 
 import { API } from "../../const";
 
@@ -13,7 +13,7 @@ import { customError, errHandler } from "..";
 
 export const registerEpic = (action$) =>
   action$.pipe(
-    ofType(REGISTER_START),
+    ofType(REGISTER_BEGIN),
     mergeMap(({ username, email, password }) =>
       ajax
         .post(

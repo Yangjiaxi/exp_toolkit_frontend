@@ -14,14 +14,16 @@ import {
 
 import { API } from "../../const";
 
-import { customError, errHandler } from "..";
+import { customError, errHandler, checkToken } from "..";
 
 export const createProjEpic = (action$) =>
   action$.pipe(
     ofType(CREATE_PROJECT_BEGIN),
     mergeMap(({ uploadData }) => {
+      const token = checkToken();
       return ajax
         .post(`${API}/proj/create`, JSON.stringify(uploadData), {
+          Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         })
         .pipe(

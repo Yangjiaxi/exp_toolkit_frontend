@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@material-ui/core";
 
-import { Info, Create } from "@material-ui/icons";
+import { Info, Create, ContactPhone, ListAltTwoTone } from "@material-ui/icons";
 
 import Anchor from "../Anchor";
 import { PAGE_NAME_DICT, PAGE_NAME_DICT_CN } from "../../pages/consts";
@@ -31,14 +31,23 @@ const itemList = [
     to: "/",
     text: PAGE_NAME_DICT_CN[PAGE_NAME_DICT.EXPLIST_PAGE],
     name: PAGE_NAME_DICT.EXPLIST_PAGE,
-    icon: <Info />,
+    icon: <ListAltTwoTone />,
   },
+  { type: "divider" },
   {
     type: "link",
     to: "/about",
     text: PAGE_NAME_DICT_CN[PAGE_NAME_DICT.ABOUT_PAGE],
     name: PAGE_NAME_DICT.ABOUT_PAGE,
     icon: <Info />,
+  },
+  { type: "divider" },
+  {
+    type: "link",
+    text: PAGE_NAME_DICT_CN[PAGE_NAME_DICT.PROFILE_PAGE],
+    icon: <ContactPhone />,
+    name: PAGE_NAME_DICT.PROFILE_PAGE,
+    to: "/profile",
   },
   { type: "divider" },
 ];

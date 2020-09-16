@@ -22,8 +22,8 @@ const Register = memo(
     }, [changeBrowserPath]);
 
     const handleRegister = () => {
-      if (username && username.trim().length < 6) {
-        enqueueSnackbar("用户名至少六位", {
+      if (username && username.trim().length < 3) {
+        enqueueSnackbar("用户名至少三位", {
           variant: "error",
         });
         return;

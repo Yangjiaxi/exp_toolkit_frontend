@@ -180,17 +180,40 @@ export const logout = () => ({
   type: LOGOUT,
 });
 
-export const LOGIN_START = "LOGIN_START";
-export const loginStart = (email, password) => ({
-  type: LOGIN_START,
+export const LOGIN_BEGIN = "LOGIN_BEGIN";
+export const loginStart = (username, password) => ({
+  type: LOGIN_BEGIN,
+  username,
+  password,
+});
+
+export const REGISTER_BEGIN = "REGISTER_BEGIN";
+export const registerStart = (username, email, password) => ({
+  type: REGISTER_BEGIN,
+  username,
   email,
   password,
 });
 
-export const REGISTER_START = "REGISTER_START";
-export const registerStart = (username, email, password) => ({
-  type: REGISTER_START,
-  username,
-  email,
-  password,
+export const CHANGE_PASSWORD_BEGIN = "CHANGE_PASSWORD_BEGIN";
+export const changePasswordBegin = (oldPassword, newPassword) => ({
+  type: CHANGE_PASSWORD_BEGIN,
+  oldPassword,
+  newPassword,
+});
+
+export const CHANGE_PASSWORD_FINISH = "CHANGE_PASSWORD_FINISH";
+export const changePasswordFinish = () => ({
+  type: CHANGE_PASSWORD_FINISH,
+});
+
+export const GET_USER_INFO_BEGIN = "GET_USER_INFO_BEGIN";
+export const getUserInfoBegin = () => ({
+  type: GET_USER_INFO_BEGIN,
+});
+
+export const GET_USER_INFO_FINISH = "GET_USER_INFO_FINISH";
+export const getUserInfoFinish = (info) => ({
+  type: GET_USER_INFO_FINISH,
+  info,
 });
