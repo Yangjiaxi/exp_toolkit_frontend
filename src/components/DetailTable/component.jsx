@@ -1,4 +1,4 @@
-import React, { memo, forwardRef, useState, Fragment } from "react";
+import React, { memo, forwardRef, useState } from "react";
 
 import ReactEcharts from "echarts-for-react"; // or var ReactEcharts = require('echarts-for-react');
 
@@ -43,14 +43,15 @@ const DetailTable = memo(({ title, columns, data }) => {
   const classes = useStyles();
   const [isDense, setDense] = useState(false);
   const [plotKey, setplotKey] = useState("");
+  const [isPlot, setIsPlot] = useState(false);
 
   const handleChangeSelect = (event) => {
     setplotKey(event.target.value);
   };
 
   const selectContent = () => {
-    console.log(columns);
-    console.log(data);
+    // console.log(columns);
+    // console.log(data);
     const res = columns
       .filter((ele) => {
         const num = data[0][ele.field];
@@ -63,18 +64,21 @@ const DetailTable = memo(({ title, columns, data }) => {
 
   const res = selectContent();
 
-  const getOption = () => {
-    // console.log(plotKey);
-    // console.log(data);
+  const getPlot = () => {
     const plotX = data.map((ele, index) => index);
     const plotY = data.map((ele) => ele[plotKey]);
 
     const option = {
-      legend: {
-        data: [columns[Number(plotKey)].title],
-        // data: ["sss"],
+      title: {
+        left: "center",
+        text: `${isPlot ? columns[plotKey].title : ""}`,
       },
-      tooltip: {},
+      tooltip: {
+        trigger: "axis",
+        position(pt) {
+          return [pt[0], "10%"];
+        },
+      },
       xAxis: {
         data: plotX,
       },
@@ -86,6 +90,11 @@ const DetailTable = memo(({ title, columns, data }) => {
         max: (value) => {
           return value.max + 0.1 * (value.max - value.min);
         },
+        axisLabel: {
+          formatter(value) {
+            return Number.parseFloat(value).toFixed(3);
+          },
+        },
       },
       series: [
         {
@@ -93,6 +102,7 @@ const DetailTable = memo(({ title, columns, data }) => {
           type: "line",
         },
       ],
+
       dataZoom: [
         {
           type: "slider",
@@ -110,11 +120,11 @@ const DetailTable = memo(({ title, columns, data }) => {
       ],
     };
 
-    return option;
+    return <ReactEcharts option={option} notMerge lazyUpdate />;
   };
 
   const handlePlot = () => {
-    getOption();
+    setIsPlot(true);
   };
 
   const titleComp = (
@@ -188,7 +198,7 @@ const DetailTable = memo(({ title, columns, data }) => {
         >
           绘制该属性图像
         </Button>
-        <ReactEcharts option={getOption()} notMerge lazyUpdate />
+        {isPlot ? getPlot() : <tooltip />}
       </Paper>
     </>
   );
