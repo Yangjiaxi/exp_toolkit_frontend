@@ -65,7 +65,7 @@ const DetailTable = memo(({ title, columns, data }) => {
   const res = selectContent();
 
   const getPlot = () => {
-    const plotX = data.map((ele, index) => index);
+    const plotX = data.map((ele, index) => index + 1);
     const plotY = data.map((ele) => ele[plotKey]);
 
     const option = {
@@ -157,6 +157,41 @@ const DetailTable = memo(({ title, columns, data }) => {
   return (
     <>
       <Grow in>
+        <Paper className={classes.plot}>
+          <Select
+            labelId="Age"
+            className={classes.plotButton}
+            id="demo-simple-select"
+            value={plotKey}
+            onChange={handleChangeSelect}
+            style={{ minWidth: 150 }}
+          >
+            {res.map((ele, index) => {
+              return (
+                <MenuItem key={index} value={ele[0]}>
+                  {ele[1]}
+                </MenuItem>
+              );
+            })}
+          </Select>
+          <Button
+            variant="outlined"
+            color="secondary"
+            size="medium"
+            onClick={handlePlot}
+          >
+            绘制折线图
+          </Button>
+          {isPlot ? (
+            getPlot()
+          ) : (
+            <Typography className={classes.text} align="center">
+              选择属性列来绘制图像
+            </Typography>
+          )}
+        </Paper>
+      </Grow>
+      <Grow in>
         <MaterialTable
           title={titleComp}
           columns={columns.map((c) => ({ ...c, tableData: undefined }))}
@@ -173,33 +208,6 @@ const DetailTable = memo(({ title, columns, data }) => {
           }}
         />
       </Grow>
-      <Paper className={classes.plot}>
-        <Select
-          labelId="Age"
-          className={classes.plotButton}
-          id="demo-simple-select"
-          value={plotKey}
-          onChange={handleChangeSelect}
-          style={{ minWidth: 150 }}
-        >
-          {res.map((ele, index) => {
-            return (
-              <MenuItem key={index} value={ele[0]}>
-                {ele[1]}
-              </MenuItem>
-            );
-          })}
-        </Select>
-        <Button
-          variant="outlined"
-          color="secondary"
-          size="medium"
-          onClick={handlePlot}
-        >
-          绘制该属性图像
-        </Button>
-        {isPlot ? getPlot() : <tooltip />}
-      </Paper>
     </>
   );
 });

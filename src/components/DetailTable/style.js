@@ -1,6 +1,6 @@
 import { createStyles, makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles(({ spacing }) =>
+const useStyles = makeStyles(({ spacing, palette }) =>
   createStyles({
     root: {},
     table: { padding: spacing(10) },
@@ -8,11 +8,16 @@ const useStyles = makeStyles(({ spacing }) =>
       marginLeft: spacing(2),
     },
     plot: {
-      marginTop: spacing(2),
+      marginBottom: spacing(2),
       padding: spacing(2),
     },
     plotButton: {
       marginRight: spacing(2),
+    },
+    text: {
+      padding: spacing(2),
+      fontWeight: "bold",
+      color: palette.grey[600],
     },
   }),
 );
