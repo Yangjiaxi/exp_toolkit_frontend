@@ -3,6 +3,7 @@ import * as actions from "../actions";
 const init = {
   // 项目列表页面
   projList: null,
+  trashList: null,
   // 点击进入一个项目
   projID: null,
   projInfo: null,
@@ -23,6 +24,9 @@ export const contentReducer = (state = init, action) => {
     case actions.GET_PROJECT_FINISH:
       const { projList } = action;
       return { ...state, projList };
+    case actions.GET_TRASH_FINISH:
+      const { trashList } = action;
+      return { ...state, trashList };
     case actions.DELELE_PROJECT_FINISH: // useless
       return state;
     case actions.GET_PROJ_INFO_FINISH:

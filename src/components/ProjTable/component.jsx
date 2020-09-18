@@ -3,10 +3,11 @@ import React, { memo, Fragment } from "react";
 import { List, Paper, Typography } from "@material-ui/core";
 
 import ProjectRow from "../ProjRow";
+import TrashRow from "../TrashRow";
 
 import useStyles from "./style";
 
-const ProjectsTable = memo(({ data }) => {
+const ProjectsTable = memo(({ data, isTrash = false }) => {
   const classes = useStyles();
   const dataFix = data || [];
   const dataLength = dataFix.length;
@@ -20,9 +21,12 @@ const ProjectsTable = memo(({ data }) => {
   );
 
   const makeEach = (ele, index) => {
-    return (
-      <ProjectRow rowData={ele} disableDivider={dataLength - 1 === index} />
-    );
+    if (!isTrash) {
+      return (
+        <ProjectRow rowData={ele} disableDivider={dataLength - 1 === index} />
+      );
+    }
+    return <TrashRow rowData={ele} disableDivider={dataLength - 1 === index} />;
   };
 
   if (dataFix.length > 0) {

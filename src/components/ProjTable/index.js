@@ -1,8 +1,6 @@
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import {} from "../../redux/actions";
-
 import ProjectsTable from "./component";
 
 const mapStateToProps = ({ component: { languageName, isMobile } }) => ({

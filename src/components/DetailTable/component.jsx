@@ -41,6 +41,15 @@ const tableIcons = {
 
 const DetailTable = memo(({ title, columns, data }) => {
   const classes = useStyles();
+  if (data.length === 0)
+    return (
+      <Paper>
+        <Typography variant="h4" align="center" className={classes.noText}>
+          暂无数据
+        </Typography>
+      </Paper>
+    );
+
   const [isDense, setDense] = useState(false);
   const [plotKey, setplotKey] = useState("");
   const [isPlot, setIsPlot] = useState(false);

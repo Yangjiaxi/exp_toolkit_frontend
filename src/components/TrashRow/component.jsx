@@ -21,29 +21,24 @@ import { Menu as MenuIcon } from "@material-ui/icons";
 
 import Dialog from "../Dialog";
 
-const ProjectRow = memo((props) => {
+const TrashRow = memo((props) => {
   const {
-    rowData: { title, lastUse, lastUpdate, _id: id },
-    deleteProj,
+    rowData: { title, deleteTime, _id: id },
+    restoreProj,
     disableDivider,
-    pushUrl,
   } = props;
 
   const [anchorDoc, setAnchorDoc] = useState(null);
   const [dialog, setDialog] = useState(false);
 
-  const handleJumpToDoc = () => {
-    pushUrl(`/proj/${id}`);
-  };
-
-  const handleClickDelete = () => {
+  const handleClickRestore = () => {
     setAnchorDoc(null);
     setDialog(true);
   };
 
   const handleDelete = () => {
     setDialog(false);
-    deleteProj(id);
+    restoreProj(id);
   };
 
   const handleClickButton = ({ currentTarget }) => {
@@ -51,16 +46,11 @@ const ProjectRow = memo((props) => {
   };
 
   const timeWords = () => {
-    const lastUpdateWord = lastUpdate
-      ? moment(lastUpdate).format("YYYY-MM-DD HH:mm:ss")
-      : "暂无";
+    const deleteWord = moment(deleteTime).format("YYYY-MM-DD HH:mm:ss");
     return (
       <>
         <Typography component="span" display="block">
-          {`最后使用: ${moment(lastUse).format("YYYY-MM-DD HH:mm:ss")}`}
-        </Typography>
-        <Typography component="span" display="block">
-          {`最近更新: ${lastUpdateWord}`}
+          {`删除时间: ${deleteWord}`}
         </Typography>
       </>
     );
@@ -76,7 +66,7 @@ const ProjectRow = memo((props) => {
 
   return (
     <>
-      <ListItem button onClick={handleJumpToDoc}>
+      <ListItem>
         <Grow in>
           <ListItemText primary={titleWords()} secondary={timeWords()} />
         </Grow>
@@ -93,17 +83,17 @@ const ProjectRow = memo((props) => {
         open={Boolean(anchorDoc)}
         onClose={() => setAnchorDoc(null)}
       >
-        <MenuItem onClick={handleClickDelete}>删除</MenuItem>
+        <MenuItem onClick={handleClickRestore}>恢复</MenuItem>
       </Menu>
       <Dialog
         title="确认"
         open={dialog}
         onConfirm={handleDelete}
         onCancel={() => setDialog(false)}
-        content="确认要删除嘛？QAQ"
+        content="确认恢复吗？"
       />
     </>
   );
 });
 
-export default ProjectRow;
+export default TrashRow;

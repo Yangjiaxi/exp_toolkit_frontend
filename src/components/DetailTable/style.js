@@ -19,6 +19,10 @@ const useStyles = makeStyles(({ spacing, palette }) =>
       fontWeight: "bold",
       color: palette.grey[600],
     },
+    noText: {
+      padding: spacing(10),
+      color: palette.grey[500],
+    },
   }),
 );
 

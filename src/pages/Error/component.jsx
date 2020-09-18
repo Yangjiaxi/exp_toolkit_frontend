@@ -1,7 +1,8 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 
 import { Typography, Paper } from "@material-ui/core";
 import { createStyles, makeStyles } from "@material-ui/styles";
+import { PAGE_NAME_DICT } from "../consts";
 
 const useStyles = makeStyles(({ spacing }) =>
   createStyles({
@@ -17,8 +18,11 @@ const useStyles = makeStyles(({ spacing }) =>
   }),
 );
 
-const NoMatch = memo(() => {
+const Error = memo(({ changeBrowserPath }) => {
   const classes = useStyles();
+  useEffect(() => {
+    changeBrowserPath(PAGE_NAME_DICT.ERROR_PAGE);
+  }, [changeBrowserPath]);
   return (
     <Paper className={classes.root}>
       <Typography variant="h5" className={classes.key}>
@@ -28,4 +32,4 @@ const NoMatch = memo(() => {
   );
 });
 
-export default NoMatch;
+export default Error;

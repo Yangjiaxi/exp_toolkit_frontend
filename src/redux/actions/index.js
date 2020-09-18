@@ -56,21 +56,6 @@ export const detectWidth = (isMobile) => ({
   isMobile,
 });
 
-export const SHOULD_UPDATE_RECENT = "SHOULD_UPDATE_RECENT";
-export const shouldUpdateRecent = () => ({
-  type: SHOULD_UPDATE_RECENT,
-});
-
-export const SHOULD_UPDATE_MY = "SHOULD_UPDATE_MY";
-export const shouldUpdateMy = () => ({
-  type: SHOULD_UPDATE_MY,
-});
-
-export const SHOULD_UPDATE_TRASH = "SHOULD_UPDATE_TRASH";
-export const shouldUpdateTrash = () => ({
-  type: SHOULD_UPDATE_TRASH,
-});
-
 export const GET_PROJECT_BEGIN = "GET_PROJECT_BEGIN";
 export const getProjBegin = () => ({
   type: GET_PROJECT_BEGIN,
@@ -82,6 +67,17 @@ export const getProjFinish = (projList) => ({
   projList,
 });
 
+export const GET_TRASH_BEGIN = "GET_TRASH_BEGIN";
+export const getTrashBegin = () => ({
+  type: GET_TRASH_BEGIN,
+});
+
+export const GET_TRASH_FINISH = "GET_TRASH_FINISH";
+export const getTrashFinish = (trashList) => ({
+  type: GET_TRASH_FINISH,
+  trashList,
+});
+
 export const DELELE_PROJECT_BEGIN = "DELETE_PROJECT_BEGIN";
 export const deleteProjBegin = (id) => ({
   type: DELELE_PROJECT_BEGIN,
@@ -91,6 +87,17 @@ export const deleteProjBegin = (id) => ({
 export const DELELE_PROJECT_FINISH = "DELELE_PROJECT_FINISH";
 export const deleteProjFinish = () => ({
   type: DELELE_PROJECT_FINISH,
+});
+
+export const RESTORE_PROJECT_BEGIN = "RESTORE_PROJECT_BEGIN";
+export const restoreProjBegin = (id) => ({
+  type: RESTORE_PROJECT_BEGIN,
+  id,
+});
+
+export const RESTORE_PROJECT_FINISH = "RESTORE_PROJECT_FINISH";
+export const restoreProjFinish = () => ({
+  type: RESTORE_PROJECT_FINISH,
 });
 
 export const GET_PROJ_INFO_BEGIN = "GET_PROJ_INFO_BEGIN";

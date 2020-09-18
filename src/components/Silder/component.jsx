@@ -11,7 +11,13 @@ import {
   Typography,
 } from "@material-ui/core";
 
-import { Info, Create, ContactPhone, ListAltTwoTone } from "@material-ui/icons";
+import {
+  Info,
+  Create,
+  ContactPhone,
+  DeleteOutline,
+  ListAltTwoTone,
+} from "@material-ui/icons";
 
 import Anchor from "../Anchor";
 import { PAGE_NAME_DICT, PAGE_NAME_DICT_CN } from "../../pages/consts";
@@ -33,13 +39,12 @@ const itemList = [
     name: PAGE_NAME_DICT.EXPLIST_PAGE,
     icon: <ListAltTwoTone />,
   },
-  { type: "divider" },
   {
     type: "link",
-    to: "/about",
-    text: PAGE_NAME_DICT_CN[PAGE_NAME_DICT.ABOUT_PAGE],
-    name: PAGE_NAME_DICT.ABOUT_PAGE,
-    icon: <Info />,
+    text: PAGE_NAME_DICT_CN[PAGE_NAME_DICT.TRASH_PAGE],
+    icon: <DeleteOutline />,
+    name: PAGE_NAME_DICT.TRASH_PAGE,
+    to: "/trash",
   },
   { type: "divider" },
   {
@@ -49,7 +54,13 @@ const itemList = [
     name: PAGE_NAME_DICT.PROFILE_PAGE,
     to: "/profile",
   },
-  { type: "divider" },
+  {
+    type: "link",
+    to: "/about",
+    text: PAGE_NAME_DICT_CN[PAGE_NAME_DICT.ABOUT_PAGE],
+    name: PAGE_NAME_DICT.ABOUT_PAGE,
+    icon: <Info />,
+  },
 ];
 
 const Slider = memo(({ open, toggleSlider, pageName, isMobile }) => {

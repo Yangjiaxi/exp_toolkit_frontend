@@ -19,6 +19,7 @@ const Login = lazy(() => import("../Login"));
 const Register = lazy(() => import("../Register"));
 
 const ProjectList = lazy(() => import("../ProjectList"));
+const Trash = lazy(() => import("../Trash"));
 const About = lazy(() => import("../About"));
 const Project = lazy(() => import("../Project"));
 const Experiment = lazy(() => import("../Experiment"));
@@ -26,7 +27,7 @@ const NewProject = lazy(() => import("../NewProject"));
 const ModifyProject = lazy(() => import("../ModifyProject"));
 const Profile = lazy(() => import("../Profile"));
 
-const NoMatch = lazy(() => import("../NoMatch"));
+const Error = lazy(() => import("../Error"));
 
 const Index = memo(({ themeMode, themeColor, pageName }) => {
   const mainFrame = (Component) => (props) => {
@@ -89,6 +90,7 @@ const Index = memo(({ themeMode, themeColor, pageName }) => {
         <Route path="/login" exact render={miniFrame(Login)} />
         <Route path="/register" exact render={miniFrame(Register)} />
         <Route path="/" exact render={mainFrame(ProjectList)} />
+        <Route path="/trash" exact render={mainFrame(Trash)} />
         <Route path="/about" exact render={mainFrame(About)} />
         <Route path="/create" exact render={mainFrame(NewProject)} />
         <Route
@@ -99,7 +101,7 @@ const Index = memo(({ themeMode, themeColor, pageName }) => {
         <Route path="/proj/:projectID" render={mainFrame(Project)} />
         <Route path="/exp/:expID" render={mainFrame(Experiment)} />
         <Route path="/profile" exact render={mainFrame(Profile)} />
-        <Route render={mainFrame(NoMatch)} />
+        <Route render={mainFrame(Error)} />
       </Switch>
     </MuiThemeProvider>
   );
