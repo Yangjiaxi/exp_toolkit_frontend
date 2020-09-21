@@ -9,6 +9,7 @@ import {
   IconButton,
 } from "@material-ui/core";
 import copy from "copy-to-clipboard";
+import { omit, pick } from "lodash";
 
 import { FileCopy } from "@material-ui/icons";
 import Loading from "../../components/CircularProgress";
@@ -52,15 +53,28 @@ const dataTransform = (info) => {
 
   const dataContent = data.map((ele) => datasPiece(ele.datas, mapDict));
 
-  const dataNeed = data.map((ele, index) => ({
+  const allData = data.map((ele, index) => ({
     ...dataContent[index],
-    [columns.length - 1]: moment(ele.lastUpdate).fromNow(),
+    [columns.length - 1]: ele.lastUpdate,
+    [columns.length]: ele._id,
   }));
 
-  const dataID = data.map((ele) => ({
-    expID: ele._id,
-  }));
-  return { columns, dataNeed, dataID };
+  allData.sort((a, b) => {
+    return b[columns.length - 1] - a[columns.length - 1];
+  });
+
+  const dataShow = allData.map((ele) => {
+    const omitEle = omit(ele, columns.length);
+    omitEle[columns.length - 1] = moment(omitEle[columns.length - 1]).fromNow();
+    return omitEle;
+  });
+
+  const dataId = allData.map((ele) => {
+    return { expID: pick(ele, columns.length)[columns.length] };
+  });
+
+  console.log(dataId);
+  return { columns, dataShow, dataId };
 };
 
 const Project = memo(
@@ -90,15 +104,15 @@ const Project = memo(
       return <Loading />;
     }
     const { projectName, appendix, createTime } = projInfo;
-    const { columns, dataNeed, dataID } = dataTransform(projInfo);
+    const { columns, dataShow, dataId } = dataTransform(projInfo);
 
     return (
       <Container maxWidth="xl" className={classes.root}>
         <DataTable
           title={`${projectName}`}
           columns={columns.map((c) => ({ ...c, tableData: undefined }))}
-          data={dataNeed}
-          dataID={dataID}
+          data={dataShow}
+          dataID={dataId}
           projectID={projectID}
         />
         <Grow in>
@@ -191,6 +205,31 @@ const Project = memo(
                 ),
               }}
             />
+            {/* <TextField
+              id="Id"
+              className={classes.id}
+              label="分享实验地址"
+              fullWidth
+              value={`${API}/proj/${projectID}`}
+              variant="outlined"
+              InputProps={{
+                readOnly: true,
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={() => {
+                        copy(`${API}/proj/${projectID}`);
+                        enqueueSnackbar("复制地址成功", { variant: "success" });
+                      }}
+                      edge="end"
+                    >
+                      <FileCopy />
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
+            /> */}
           </Paper>
         </Grow>
       </Container>

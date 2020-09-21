@@ -100,7 +100,7 @@ const ProjectRow = memo((props) => {
         open={dialog}
         onConfirm={handleDelete}
         onCancel={() => setDialog(false)}
-        content="确认要删除嘛？QAQ"
+        content="确认要删除该项目吗？"
       />
     </>
   );

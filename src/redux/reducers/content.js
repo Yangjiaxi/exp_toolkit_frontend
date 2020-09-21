@@ -29,6 +29,8 @@ export const contentReducer = (state = init, action) => {
       return { ...state, trashList };
     case actions.DELELE_PROJECT_FINISH: // useless
       return state;
+    case actions.DELETE_EXP_FINISH: // useless
+      return state;
     case actions.GET_PROJ_INFO_FINISH:
       const { info } = action;
       return { ...state, projInfo: info };

@@ -59,8 +59,6 @@ const DetailTable = memo(({ title, columns, data }) => {
   };
 
   const selectContent = () => {
-    // console.log(columns);
-    // console.log(data);
     const res = columns
       .filter((ele) => {
         const num = data[0][ele.field];

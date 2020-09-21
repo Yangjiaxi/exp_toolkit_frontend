@@ -169,6 +169,18 @@ export const getProjectConfFinish = (projConf) => ({
   projConf,
 });
 
+export const DELETE_EXP_BEGIN = "DELETE_EXP_BEGIN";
+export const deleteExpBegin = (id, projectID) => ({
+  type: DELETE_EXP_BEGIN,
+  id,
+  projectID,
+});
+
+export const DELETE_EXP_FINISH = "DELETE_EXP_FINISH";
+export const deleteExpFinish = () => ({
+  type: DELETE_EXP_FINISH,
+});
+
 export const CLEAN_UP_CONF = "CLEAN_UP_CONF";
 export const cleanUpConf = () => ({
   type: CLEAN_UP_CONF,
