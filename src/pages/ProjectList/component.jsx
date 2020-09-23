@@ -7,7 +7,7 @@ import { PAGE_NAME_DICT } from "../consts";
 
 const ProjectList = memo(({ changeBrowserPath, projList, getProj }) => {
   useEffect(() => {
-    changeBrowserPath(PAGE_NAME_DICT.EXPLIST_PAGE);
+    changeBrowserPath(PAGE_NAME_DICT.PROJLIST_PAGE);
   }, [changeBrowserPath]);
 
   useEffect(() => {

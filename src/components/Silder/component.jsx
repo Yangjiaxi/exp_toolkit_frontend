@@ -35,8 +35,8 @@ const itemList = [
   {
     type: "link",
     to: "/",
-    text: PAGE_NAME_DICT_CN[PAGE_NAME_DICT.EXPLIST_PAGE],
-    name: PAGE_NAME_DICT.EXPLIST_PAGE,
+    text: PAGE_NAME_DICT_CN[PAGE_NAME_DICT.PROJLIST_PAGE],
+    name: PAGE_NAME_DICT.PROJLIST_PAGE,
     icon: <ListAltTwoTone />,
   },
   {
