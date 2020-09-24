@@ -43,11 +43,10 @@ export const changePasswordEpic = (action$) =>
             if (res.type === "success") {
               return of(
                 changePasswordFinish(),
-                delay(1500),
-                enqueueSnackbar("修改成功，即将返回登录界面", {
+                logout(),
+                enqueueSnackbar("密码修改成功", {
                   variant: "success",
                 }),
-                logout(),
               );
             }
             throw customError(res);
