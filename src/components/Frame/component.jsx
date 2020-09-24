@@ -49,17 +49,6 @@ const Frame = memo(
     ) : (
       <Redirect to="/login" />
     );
-    // return (
-    //   <div className={classes.root}>
-    //     <AppBar />
-    //     <Slider />
-    //     <MobileFab />
-    //     <Container maxWidth="xl" className={classes.content}>
-    //       {children}
-    //     </Container>
-    //     {isLoading && <Progress />}
-    //   </div>
-    // );
   },
 );
 
