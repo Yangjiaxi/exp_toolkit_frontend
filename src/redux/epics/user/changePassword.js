@@ -1,13 +1,7 @@
 import { ofType } from "redux-observable";
 import { of } from "rxjs";
 import { ajax } from "rxjs/ajax";
-import {
-  catchError,
-  mergeMap,
-  startWith,
-  endWith,
-  delay,
-} from "rxjs/operators";
+import { catchError, mergeMap, startWith, endWith } from "rxjs/operators";
 
 import {
   CHANGE_PASSWORD_BEGIN,
