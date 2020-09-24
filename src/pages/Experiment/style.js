@@ -6,16 +6,12 @@ const useStyles = makeStyles(({ spacing }) =>
       paddingBottom: spacing(30),
     },
     paper: {
-      marginTop: spacing(2),
+      marginBottom: spacing(2),
       padding: spacing(3),
       whiteSpace: "pre-wrap",
     },
     appendix: {
       marginTop: spacing(3),
-    },
-    input: {
-      lineHeight: "1.5em",
-      fontSize: "1.3em",
     },
     back: {
       marginBottom: "1em",

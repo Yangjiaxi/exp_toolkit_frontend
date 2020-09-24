@@ -45,9 +45,16 @@ const dataTransform = (info) => {
     field: `${index}`,
   }));
 
+  const len = columns.length;
+
+  columns.push({
+    title: "备注",
+    field: `${len}`,
+  });
+
   columns.push({
     title: "最后更新",
-    field: `${columns.length}`,
+    field: `${len + 1}`,
     type: "time",
   });
 
@@ -55,6 +62,7 @@ const dataTransform = (info) => {
 
   const allData = data.map((ele, index) => ({
     ...dataContent[index],
+    [columns.length - 2]: ele.comment,
     [columns.length - 1]: ele.lastUpdate,
     [columns.length]: ele._id,
   }));
@@ -73,7 +81,6 @@ const dataTransform = (info) => {
     return { expID: pick(ele, columns.length)[columns.length] };
   });
 
-  console.log(dataId);
   return { columns, dataShow, dataId };
 };
 
@@ -133,8 +140,6 @@ const Project = memo(
                 },
               }}
             />
-            {}
-
             <TextField
               id="appendix"
               className={classes.appendix}
@@ -205,31 +210,6 @@ const Project = memo(
                 ),
               }}
             />
-            {/* <TextField
-              id="Id"
-              className={classes.id}
-              label="分享实验地址"
-              fullWidth
-              value={`${API}/proj/${projectID}`}
-              variant="outlined"
-              InputProps={{
-                readOnly: true,
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => {
-                        copy(`${API}/proj/${projectID}`);
-                        enqueueSnackbar("复制地址成功", { variant: "success" });
-                      }}
-                      edge="end"
-                    >
-                      <FileCopy />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            /> */}
           </Paper>
         </Grow>
       </Container>

@@ -133,7 +133,7 @@ const DataTable = memo((props) => {
                     }}
                     size="small"
                   >
-                    <Delete fontSize="medium" />
+                    <Delete />
                   </IconButton>
                   <Button
                     className={classes.moreInfo}

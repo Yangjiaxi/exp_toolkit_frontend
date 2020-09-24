@@ -1,7 +1,7 @@
 import React, { memo, useEffect } from "react";
 import moment from "moment";
 
-import { Container, Button } from "@material-ui/core";
+import { Container, Button, TextField, Paper } from "@material-ui/core";
 import { ChevronLeft as ChevronLeftIcon } from "@material-ui/icons";
 
 import Loading from "../../components/CircularProgress";
@@ -72,7 +72,7 @@ const Experiment = memo(
       return <Loading />;
     }
 
-    const { projectID, title } = expInfo;
+    const { projectID, title, comment } = expInfo;
     const { columns, dataNeed } = dataTransform(expInfo);
 
     // const { columns, data } = D;
@@ -89,6 +89,18 @@ const Experiment = memo(
             返回项目
           </Button>
         </Anchor>
+        <Paper className={classes.paper}>
+          <TextField
+            id="comment"
+            label="备注"
+            variant="outlined"
+            fullWidth
+            defaultValue={comment}
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+        </Paper>
         <DetailTable
           title={title}
           columns={columns.map((c) => ({ ...c, tableData: undefined }))}
