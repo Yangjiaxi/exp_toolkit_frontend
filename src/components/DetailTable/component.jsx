@@ -39,7 +39,7 @@ const tableIcons = {
   Export: forwardRef((props, ref) => <SaveAlt {...props} ref={ref} />),
 };
 
-const DetailTable = memo(({ title, columns, data }) => {
+const DetailTable = memo(({ title, columns, data, enqueueSnackbar }) => {
   const classes = useStyles();
   if (data.length === 0)
     return (
@@ -131,6 +131,12 @@ const DetailTable = memo(({ title, columns, data }) => {
   };
 
   const handlePlot = () => {
+    if (plotKey === "") {
+      enqueueSnackbar("请选择需要绘制的数据列", {
+        variant: "warning",
+      });
+      return;
+    }
     setIsPlot(true);
   };
 
