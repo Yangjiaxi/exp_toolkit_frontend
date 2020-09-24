@@ -1,13 +1,7 @@
 import { ofType } from "redux-observable";
 import { of } from "rxjs";
 import { ajax } from "rxjs/ajax";
-import {
-  catchError,
-  mergeMap,
-  startWith,
-  endWith,
-  delay,
-} from "rxjs/operators";
+import { catchError, mergeMap, startWith, endWith } from "rxjs/operators";
 
 import {
   CHANGE_PASSWORD_BEGIN,
@@ -43,11 +37,10 @@ export const changePasswordEpic = (action$) =>
             if (res.type === "success") {
               return of(
                 changePasswordFinish(),
-                delay(1500),
-                enqueueSnackbar("修改成功，即将返回登录界面", {
+                logout(),
+                enqueueSnackbar("密码修改成功", {
                   variant: "success",
                 }),
-                logout(),
               );
             }
             throw customError(res);
