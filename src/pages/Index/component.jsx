@@ -3,7 +3,7 @@ import { Route, Switch, withRouter } from "react-router";
 import Helmet from "react-helmet";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
-import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
+import createTheme from "@material-ui/core/styles/createTheme";
 import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 
 import { PAGE_NAME_DICT_CN } from "../consts";
@@ -47,13 +47,14 @@ const Index = memo(({ themeMode, themeColor, pageName }) => {
       </PageFrame>
     );
   };
-  const miniFrame = (Component) => () => (
-    <MiniFrame>
-      <Suspense fallback={<Progress />}>
-        <Component />
-      </Suspense>
-    </MiniFrame>
-  );
+  const miniFrame = (Component) => () =>
+    (
+      <MiniFrame>
+        <Suspense fallback={<Progress />}>
+          <Component />
+        </Suspense>
+      </MiniFrame>
+    );
   /**
    * MiniFrame主要负责注册与登陆，不需要获得路由参数
    * MainFrame主要负责登陆后的逻辑，有可能需要获得URL路由参数
@@ -62,7 +63,7 @@ const Index = memo(({ themeMode, themeColor, pageName }) => {
   const colorObj = colorDict[themeColor];
   const needChangeSecondary = ["red", "pink"].includes(themeColor);
 
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       type: themeMode,
       primary: colorObj,
